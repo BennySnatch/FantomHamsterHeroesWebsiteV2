@@ -32,7 +32,7 @@ function RoadmapItem({
     <div className="flex items-center w-full ">
       <div className=" flex border-l-0 border-blackish">
         <div className="flex items-center justify-center">
-          <span className="text-blackish text-3xl lg:text-2xl w-24 mx-2 flex items-center justify-center border-2 border-blackish bg-purple-400">
+          <span className="text-blackish text-xl lg:text-2xl w-24 mx-2 flex items-center justify-center border-2 border-blackish bg-purple-400">
             Phase {index}
           </span>
         </div>
