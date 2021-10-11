@@ -13,7 +13,7 @@ function Mint() {
   const { contextState, setContextState } = useContext(AppContext);
 
   const saleStats =
-    Date.now() > 1633882200000 ? 2 : Date.now() > 1633881900000 ? 1 : 0;
+    Date.now() > 1633951800000 ? 2 : Date.now() > 1633948824000 ? 1 : 0;
 
   type Popup = {
     isLoading: boolean;
@@ -39,7 +39,7 @@ function Mint() {
       });
       if (saleStats == 1) {
         try {
-          const txHash = await buyHams(
+          const txHash = await buyWhitelistedHams(
             contextState.hamContractSigner,
             contextState.price,
             buyAmount
