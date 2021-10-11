@@ -4,6 +4,7 @@ import {
   buyHams,
   buyWhitelistedHams,
   getOwnedMetas,
+  getSupply,
 } from "../../../utils/functions/HamFunctions";
 import CountdownTimer from "../../countdown";
 
@@ -24,7 +25,6 @@ function Mint() {
   };
 
   async function handleMint() {
-    console.log(Date.now());
     if (contextState.isFantom && !contextState.isPaused) {
       const popupState: Popup = {
         isLoading: true,
@@ -59,7 +59,7 @@ function Mint() {
           const popupState: Popup = {
             isLoading: false,
             isError: true,
-            message: e.message,
+            message: e.data.message,
             txHash: "",
             show: true,
           };
@@ -90,7 +90,7 @@ function Mint() {
           const popupState: Popup = {
             isLoading: false,
             isError: true,
-            message: e.message,
+            message: e.data.message,
             txHash: "",
             show: true,
           };
@@ -100,6 +100,11 @@ function Mint() {
           });
         }
       }
+      const currentSupply = await getSupply(contextState.hamContract);
+      setContextState({
+        ...contextState,
+        currentSupply,
+      });
     }
   }
 
