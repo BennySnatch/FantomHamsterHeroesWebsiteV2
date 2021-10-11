@@ -24,33 +24,34 @@ export const getOwnedIDs=async function(contract:any, addr:string){
 
 export const buyHams= async function(contract: any, price:any, amount:any){
 const totalPrice=(price*amount).toString()
-    try{
+
     let overrides = {
         value: ethers.utils.parseEther(totalPrice)  
     };
-    let transaction = await contract.buyMacaws(amount, overrides)
+    let transaction = await contract.buyHamsters(amount, overrides)
     let tx = await transaction.wait()
 
     return tx.transactionHash
+    
+}
 
-    }catch(e){
-        window.alert("Something went wrong!Please try again")
-        return null
-    }
+export const buyWhitelistedHams= async function(contract: any, price:any, amount:any){
+const totalPrice=(price*amount).toString()
+    let overrides = {
+        value: ethers.utils.parseEther(totalPrice)  
+    };
+    let transaction = await contract.buyWhitelistedHamster(amount, overrides)
+    let tx = await transaction.wait()
+
+    return tx.transactionHash
 }
 
 
 export const getUri= async function(id:any,contract:any){
-    const totalSupply = await contract.totalSupply();
-    if(id<=BigNumber.from(totalSupply).toNumber()){
-        const res=await fetch(`/api/yo/api/${id}`)
-        const uri=await res.json()
-        return uri
-    }
-    else{
-        return null
-    }
+    let uri = await contract.tokenUri(id);
+    return uri;
 }
+
 export const getAllUris= async function(ids:any,contract:any){
     const uris=[]
     const totalSupply = await contract.totalSupply();
