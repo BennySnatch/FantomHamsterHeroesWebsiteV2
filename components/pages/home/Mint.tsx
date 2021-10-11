@@ -14,7 +14,7 @@ function Mint() {
   const { contextState, setContextState } = useContext(AppContext);
 
   const saleStats =
-    Date.now() > 1633951800000 ? 2 : Date.now() > 1633948824000 ? 1 : 0;
+    Date.now() > 1633951115000 ? 2 : Date.now() > 1633948824000 ? 1 : 0;
 
   type Popup = {
     isLoading: boolean;
@@ -44,6 +44,7 @@ function Mint() {
             contextState.price,
             buyAmount
           );
+          const currentSupply = await getSupply(contextState.hamContract);
           const popupState: Popup = {
             isLoading: false,
             isError: false,
@@ -54,6 +55,7 @@ function Mint() {
           setContextState({
             ...contextState,
             popupState,
+            currentSupply,
           });
         } catch (e: any) {
           const popupState: Popup = {
@@ -75,6 +77,7 @@ function Mint() {
             contextState.price,
             buyAmount
           );
+          const currentSupply = await getSupply(contextState.hamContract);
           const popupState: Popup = {
             isLoading: false,
             isError: false,
@@ -85,6 +88,7 @@ function Mint() {
           setContextState({
             ...contextState,
             popupState,
+            currentSupply,
           });
         } catch (e: any) {
           const popupState: Popup = {
@@ -100,11 +104,11 @@ function Mint() {
           });
         }
       }
-      const currentSupply = await getSupply(contextState.hamContract);
-      setContextState({
-        ...contextState,
-        currentSupply,
-      });
+      // const currentSupply = await getSupply(contextState.hamContract);
+      // setContextState({
+      //   ...contextState,
+      //   currentSupply,
+      // });
     }
   }
 
