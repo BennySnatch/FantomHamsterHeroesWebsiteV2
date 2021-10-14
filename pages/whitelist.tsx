@@ -25,7 +25,7 @@ import Roadmap from "../components/pages/home/Roadmap";
 import Socials from "../components/pages/home/Socials";
 import Marquee from "../components/pages/home/Marquee";
 import Ham from "../components/pages/home/Ham";
-import { whitelisted } from "../utils/whitelisted ";
+import { whitelisted } from "../utils/whitelisted";
 
 declare let window: any;
 
