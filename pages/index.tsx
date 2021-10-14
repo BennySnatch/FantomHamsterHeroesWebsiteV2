@@ -73,15 +73,15 @@ const Home: NextPage = () => {
     );
 
     const addr = await signer.getAddress();
-    const price = await getPrice(macawContract);
-    const currentSupply = await getSupply(macawContract);
-    const isPaused = await saleStatus(macawContract);
+    // const price = await getPrice(macawContract);
+    // const currentSupply = await getSupply(macawContract);
+    // const isPaused = await saleStatus(macawContract);
     setContextState({
       ...contextState,
       addr,
-      price,
-      isPaused,
-      currentSupply,
+      // price,
+      // isPaused,
+      // currentSupply,
       isLoading: false,
       isConnected: true,
       macawContract,
