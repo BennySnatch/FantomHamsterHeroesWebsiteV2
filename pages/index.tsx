@@ -73,6 +73,7 @@ const Home: NextPage = () => {
     const hamContractSigner = new ethers.Contract(HAM_ADDRESS, HAM_ABI, signer);
 
     const addr = await signer.getAddress();
+
     const price = await getPrice(hamContract);
     const currentSupply = await getSupply(hamContract);
     const isPaused = await saleStatus(hamContract);
