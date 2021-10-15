@@ -6,6 +6,8 @@ import { ethers } from "ethers";
 import {
   hashToLink,
   metadataFromUri,
+  presaleTime,
+  saleTime,
   trimAddress,
   trimHash,
 } from "../utils/functions/utils";
@@ -77,9 +79,9 @@ const Home: NextPage = () => {
     const presaleStart = await getPresale(hamContract);
     const saleStart = await getSale(hamContract);
     const saleStats =
-      Date.now() > saleStart * 1000
+      Date.now() >= saleTime * 1000
         ? 2
-        : Date.now() > presaleStart * 1000
+        : Date.now() >= presaleTime * 1000
         ? 1
         : 0;
 

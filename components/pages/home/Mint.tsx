@@ -6,16 +6,13 @@ import {
   getOwnedMetas,
   getSupply,
 } from "../../../utils/functions/HamFunctions";
+import { presaleTime, saleTime } from "../../../utils/functions/utils";
 import CountdownTimer from "../../countdown";
 
 function Mint() {
   const [buyAmount, setBuyAmount] = useState(1);
   const [isMinting, setIsMinting] = useState(false);
   const { contextState, setContextState } = useContext(AppContext);
-
-  // useEffect(() => {
-  //   getSaleStats();
-  // }, [completed]);
 
   type Popup = {
     isLoading: boolean;
@@ -126,7 +123,12 @@ function Mint() {
         Mint A Hamster
       </h2>
 
-      <CountdownTimer type="Presale" time={1634231165 * 1000} />
+      {contextState.saleStats == 0 && (
+        <CountdownTimer type="Presale" time={presaleTime * 1000} />
+      )}
+      {contextState.saleStats == 1 && (
+        <CountdownTimer type="Sale" time={saleTime * 1000} />
+      )}
 
       {contextState.saleStats != 0 && (
         <div className="flex flex-col items-center">

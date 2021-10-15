@@ -3,8 +3,11 @@ import Countdown from "react-countdown";
 
 import { AppContext } from "../context/AppContext";
 import { getPresale, getSale } from "../utils/functions/HamFunctions";
+import { presaleTime, saleTime } from "../utils/functions/utils";
 
 function CountdownTimer({ time, type }: { time: number; type: string }) {
+  const { contextState, setContextState } = useContext(AppContext);
+
   const Completionist = () => (
     <div>
       {/* {contextState.saleStats == 1 && (
@@ -15,7 +18,22 @@ function CountdownTimer({ time, type }: { time: number; type: string }) {
     </div>
   );
 
-  // Renderer callback with condition
+  function countdownComplete() {
+    // window.location.reload();
+    const saleStats = contextState.saleStats + 1;
+    setContextState({
+      ...contextState,
+      saleStats,
+    });
+    console.log(
+      "completed",
+      contextState.saleStats,
+      Date.now(),
+      presaleTime,
+      saleTime
+    );
+  }
+
   const renderer = ({
     hours,
     minutes,
@@ -84,7 +102,11 @@ function CountdownTimer({ time, type }: { time: number; type: string }) {
     <div>
       {/* //1634392800000 */}
       <span className="text-blackish text-3xl mb-4 font-semibold">
-        <Countdown date={time} renderer={renderer} />
+        <Countdown
+          date={time}
+          renderer={renderer}
+          onComplete={countdownComplete}
+        />
       </span>
     </div>
   );
