@@ -6,6 +6,8 @@ import { ethers } from "ethers";
 import {
   hashToLink,
   metadataFromUri,
+  presaleTime,
+  saleTime,
   trimAddress,
   trimHash,
 } from "../utils/functions/utils";
@@ -19,7 +21,9 @@ import Footer from "../components/pages/home/Footer";
 import { HAM_ABI, HAM_ADDRESS } from "../utils/contracts/HamContract";
 
 import {
+  getPresale,
   getPrice,
+  getSale,
   getSupply,
   saleStatus,
 } from "../utils/functions/HamFunctions";
@@ -38,7 +42,7 @@ const Home: NextPage = () => {
       window.alert("You must install MetaMask to use this website");
       return;
     }
-    // connectWallet();
+    connectWallet();
     window.ethereum.on("accountsChanged", () => {
       connectWallet();
     });
@@ -65,27 +69,58 @@ const Home: NextPage = () => {
     }
 
     let signer = provider.getSigner();
-    const macawContract = new ethers.Contract(HAM_ADDRESS, HAM_ABI, provider);
-    const macawContractSigner = new ethers.Contract(
-      HAM_ADDRESS,
-      HAM_ABI,
-      signer
-    );
+    const hamContract = new ethers.Contract(HAM_ADDRESS, HAM_ABI, provider);
+    const hamContractSigner = new ethers.Contract(HAM_ADDRESS, HAM_ABI, signer);
 
     const addr = await signer.getAddress();
-    // const price = await getPrice(macawContract);
-    // const currentSupply = await getSupply(macawContract);
-    // const isPaused = await saleStatus(macawContract);
+
+    const price = await getPrice(hamContract);
+    const currentSupply = await getSupply(hamContract);
+    const isPaused = await saleStatus(hamContract);
+    const presaleStart = await getPresale(hamContract);
+    const saleStart = await getSale(hamContract);
+    const saleStats =
+      Date.now() >= saleTime * 1000
+        ? 2
+        : Date.now() >= presaleTime * 1000
+        ? 1
+        : 0;
+
     setContextState({
       ...contextState,
       addr,
-      // price,
-      // isPaused,
-      // currentSupply,
+      price,
+      isPaused,
+      currentSupply,
+      presaleStart,
+      saleStart,
+      saleStats,
       isLoading: false,
       isConnected: true,
-      macawContract,
-      macawContractSigner,
+      hamContract,
+      hamContractSigner,
+    });
+  }
+  type Popup = {
+    isLoading: boolean;
+    message: string;
+    isError: boolean;
+    txHash: string;
+    show: boolean;
+  };
+
+  function togglePop() {
+    const popupState: Popup = {
+      isLoading: false,
+      isError: false,
+      message: "",
+      txHash: "",
+      show: false,
+    };
+    setContextState({
+      ...contextState,
+      showPopup: false,
+      popupState,
     });
   }
 
@@ -102,18 +137,20 @@ const Home: NextPage = () => {
 
       <main className=" min-h-screen flex flex-col items-center justify-center max-w-screen-xl ">
         <nav className="absolute top-0 h-20 flex flex-row items-center justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
-          <div className="items-center justify-center">
-            <img
-              className="h-12 hidden lg:flex"
-              src="/assets/images/logo.png"
-              alt=""
-            />
-            <img
-              className="h-16 lg:hidden"
-              src="/assets/images/FantomHAM_LOGO.png"
-              alt=""
-            />
-          </div>
+          <Link href="/">
+            <div className="items-center justify-center cursor-pointer">
+              <img
+                className="h-12 hidden lg:flex"
+                src="/assets/images/logo.png"
+                alt=""
+              />
+              <img
+                className="h-16 lg:hidden"
+                src="/assets/images/FantomHAM_LOGO.png"
+                alt=""
+              />
+            </div>
+          </Link>
           <div className="flex items-center justify-between lg:justify-end lg:w-full ">
             <div
               className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer"
@@ -137,36 +174,93 @@ const Home: NextPage = () => {
         <Roadmap />
         <Footer />
 
-        {/* <Popup>
-          <div className=" flex rounded-2xl flex-col items-center justify-evenly text-white text-xl py-16 px-4 space-y-4 border-8 border-green-400 max-w-[400px] bg-[#0D0A21] ">
-            <span className="text-lg font-bold text-gray-300">
-              Your transaction was successfull
-            </span>
-            <div className="flex hover:text-green-400">
-              <a
-                href={hashToLink(contextState.txHash)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {trimHash(contextState.txHash)}
-              </a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
+        <Popup>
+          <div className=" flex rounded-2xl flex-col items-center justify-evenly text-white text-xl py-12 px-4 space-y-4 w-full max-w-xl bg-blackish ">
+            <div className=" flex flex-col items-center justify-center">
+              {contextState.popupState.isLoading && (
+                <div className="flex items-center justify-center flex-col">
+                  <img
+                    src="/assets/images/loading.png"
+                    className="w-40 h-40 mb-8 animate-bounce"
+                    alt=""
+                  />
+                  <span className="text-3xl font-bold text-beige">
+                    Minting Hamster...
+                  </span>
+                </div>
+              )}
+              {contextState.popupState.isError && (
+                <div className="flex items-center justify-center flex-col">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-40 text-red-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="text-4xl text-red-500 mb-6">ERROR</span>
+                  <span className="text-lg font-bold text-beige text-center">
+                    {contextState.popupState.message}
+                  </span>
+                </div>
+              )}
+              {!contextState.popupState.isLoading &&
+                !contextState.popupState.isError && (
+                  <div className="flex items-center justify-center flex-col">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-40 text-green-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span className="text-4xl font-bold text-green-600 text-center">
+                      Mint Succesfull
+                    </span>
+                    <div className="flex text-beige mt-4 hover:text-gray-600">
+                      <a
+                        href={hashToLink(contextState.popupState.txHash)}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {trimHash(contextState.popupState.txHash)}
+                      </a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                )}
+            </div>
+            <div
+              className=" border-2 rounded  bg-beige text-blackish leading-3 text-center px-4 py-2 font-bold cursor-pointer"
+              onClick={() => togglePop()}
+            >
+              Close
             </div>
           </div>
-        </Popup> */}
+        </Popup>
       </main>
     </div>
   );

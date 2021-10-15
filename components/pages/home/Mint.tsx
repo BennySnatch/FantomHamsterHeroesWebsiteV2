@@ -1,6 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../context/AppContext";
-import { buyHams, getOwnedMetas } from "../../../utils/functions/HamFunctions";
+import {
+  buyHams,
+  buyWhitelistedHams,
+  getOwnedMetas,
+  getSupply,
+} from "../../../utils/functions/HamFunctions";
+import { presaleTime, saleTime } from "../../../utils/functions/utils";
 import CountdownTimer from "../../countdown";
 
 function Mint() {
@@ -8,41 +14,106 @@ function Mint() {
   const [isMinting, setIsMinting] = useState(false);
   const { contextState, setContextState } = useContext(AppContext);
 
+  type Popup = {
+    isLoading: boolean;
+    message: string;
+    isError: boolean;
+    txHash: string;
+    show: boolean;
+  };
+
   async function handleMint() {
     if (contextState.isFantom && !contextState.isPaused) {
-      setIsMinting(true);
-
-      const txHash = await buyHams(
-        contextState.macawContractSigner,
-        contextState.price,
-        buyAmount
-      );
-
-      if (txHash) {
-        setContextState({
-          ...contextState,
-          txHash,
-          showPopup: true,
-        });
+      const popupState: Popup = {
+        isLoading: true,
+        isError: false,
+        message: "",
+        txHash: "",
+        show: true,
+      };
+      setContextState({
+        ...contextState,
+        popupState,
+      });
+      if (contextState.saleStats == 1) {
+        try {
+          const txHash = await buyWhitelistedHams(
+            contextState.hamContractSigner,
+            contextState.price,
+            buyAmount
+          );
+          const currentSupply = await getSupply(contextState.hamContract);
+          const popupState: Popup = {
+            isLoading: false,
+            isError: false,
+            message: "",
+            txHash,
+            show: true,
+          };
+          setContextState({
+            ...contextState,
+            popupState,
+            currentSupply,
+          });
+        } catch (e: any) {
+          const popupState: Popup = {
+            isLoading: false,
+            isError: true,
+            message: e.data.message,
+            txHash: "",
+            show: true,
+          };
+          setContextState({
+            ...contextState,
+            popupState,
+          });
+        }
+      } else {
+        try {
+          const txHash = await buyHams(
+            contextState.hamContractSigner,
+            contextState.price,
+            buyAmount
+          );
+          const currentSupply = await getSupply(contextState.hamContract);
+          const popupState: Popup = {
+            isLoading: false,
+            isError: false,
+            message: "",
+            txHash,
+            show: true,
+          };
+          setContextState({
+            ...contextState,
+            popupState,
+            currentSupply,
+          });
+        } catch (e: any) {
+          const popupState: Popup = {
+            isLoading: false,
+            isError: true,
+            message: e.message,
+            txHash: "",
+            show: true,
+          };
+          setContextState({
+            ...contextState,
+            popupState,
+          });
+        }
       }
-      setIsMinting(false);
     }
   }
 
   function increment() {
-    setBuyAmount(buyAmount + 1);
-  }
-  function decrement() {
-    if (buyAmount > 0) {
-      setBuyAmount(buyAmount - 1);
+    if (contextState.saleStats == 1 ? buyAmount < 2 : buyAmount < 5) {
+      setBuyAmount(buyAmount + 1);
     }
   }
 
-  function handleInput(event: any) {
-    let val = parseInt(event.target.value.replace(/\D/, buyAmount));
-    setBuyAmount(val);
-    if (isNaN(val) || isNaN(event.target.value)) {
-      setBuyAmount(0);
+  function decrement() {
+    if (buyAmount > 1) {
+      setBuyAmount(buyAmount - 1);
     }
   }
 
@@ -52,99 +123,62 @@ function Mint() {
         Mint A Hamster
       </h2>
 
-      {/* <div className="flex flex-col items-center py-12">
-        <div className="text-5xl text-gray-200 font-bold mb-8">
-          {700 - contextState.currentSupply}
-        </div>
-        <span className="text-3xl text-gray-400 uppercase tracking-widest font-semibold">
-          Available
-        </span>
-      </div>
-      <div className="flex flex-col items-center justify-center py-12 transform">
-        <div className="flex items-center py-8">
-          <span className="text-3xl text-white mr-6 ">You Pay:</span>
-          <span className="text-green-500 font-bold text-5xl">
-            {contextState.price * buyAmount} FTM{" "}
-          </span>
-        </div>
-        <div
-          onClick={() => handleMint()}
-          className="px-24 py-2 bg-btext-blackish font-semibold text-gray-800 text-2xl mb-8 cursor-pointer"
-        >
-          {contextState.isPaused ? (
-            <span className="">Live Soon</span>
-          ) : (
-            <span>Mint {buyAmount == 1 ? "a" : buyAmount} Macaw</span>
-          )}
-        </div>
+      {contextState.saleStats == 0 && (
+        <CountdownTimer type="Presale" time={presaleTime * 1000} />
+      )}
+      {contextState.saleStats == 1 && (
+        <CountdownTimer type="Sale" time={saleTime * 1000} />
+      )}
 
-        <div className="flex flex-row items-center space-x-4">
-          <div
-            onClick={() => setBuyAmount(1)}
-            className="font-white bg-green-300 p-2 w-16 h-12 flex items-center justify-center font-semibold cursor-pointer text-gray-800 text-2xl"
-          >
-            x1
-          </div>
-          <div
-            onClick={() => setBuyAmount(5)}
-            className="font-white bg-green-300 p-2 w-16 h-12 flex items-center justify-center font-semibold cursor-pointer text-gray-800 text-2xl"
-          >
-            x5
-          </div>
-          <div
-            onClick={() => setBuyAmount(10)}
-            className="font-white bg-green-300 p-2 w-16 h-12 flex items-center justify-center font-semibold cursor-pointer text-gray-800 text-2xl"
-          >
-            x10
-          </div>
-        </div>
-      </div> */}
-
-      <CountdownTimer />
-
-      <div className="flex flex-col items-center">
-        {/* <h2 className="text-6xl text-purple-700 transform -skew-x-12 py-24">
-          Comming Soon
-        </h2> */}
-        {/* <div className="flex ">
-          <input
-            className="appearance-none mb-4 mr-8 outline-none bg-transparent text-7xl text-center font-bold text-blackish w-40 border-b-2 border-blackish"
-            type="text"
-            value={buyAmount}
-            onChange={(event) => handleInput(event)}
-          />
-
-          <div className="flex flex-col space-y-2">
-            <div
-              className="w-10 h-10  text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center mb-2 font-bold p-2 rounded-lg cursor-pointer"
-              onClick={() => increment()}
-            >
-              +
+      {contextState.saleStats != 0 && (
+        <div className="flex flex-col items-center">
+          <div className="flex ">
+            <div className="flex items-center justify-center mr-8 text-8xl text-center font-bold text-blackish w-40">
+              {buyAmount}
             </div>
-            <div
-              className="w-10 h-10 text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center font-bold p-2 rounded-lg cursor-pointer"
-              onClick={() => decrement()}
-            >
-              -
+
+            <div className="flex flex-col space-y-2">
+              <div
+                className="w-10 h-10  text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center mb-2 font-bold p-2 rounded-lg cursor-pointer"
+                onClick={() => increment()}
+              >
+                +
+              </div>
+              <div
+                className="w-10 h-10 text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center font-bold p-2 rounded-lg cursor-pointer"
+                onClick={() => decrement()}
+              >
+                -
+              </div>
             </div>
           </div>
-        </div> */}
 
-        {/* Total */}
+          {/* Mint Button */}
+          <div
+            className="flex items-center justify-center bg-blackish rounded-md py-2 mt-8 px-12 cursor-pointer"
+            onClick={handleMint}
+          >
+            {contextState.saleStats == 1 && (
+              <span className="text-4xl text-beige uppercase tracking-[2px] ">
+                Mint Whitelist
+              </span>
+            )}
+            {contextState.saleStats == 2 && (
+              <span className="text-4xl text-beige uppercase tracking-[12px] mx-4 ">
+                Mint
+              </span>
+            )}
+          </div>
 
-        {/* Mint Button */}
-        {/* <div className="flex items-center justify-center bg-blackish rounded-md py-2 mt-8 px-24">
-          <span className="text-4xl text-beige uppercase tracking-[16px]">
-            Mint
-          </span>
-        </div> */}
-
-        {/* Amount left */}
-        {/* <div className="flex flex-col lg:flex-row items-center justify-center  mt-4 py-4  px-8">
-          <span className="text-3xl lg:mr-8">10000/10000</span>
-          <span className="text-xl uppercase">Hamsters Minted</span>
-        </div> */}
-      </div>
+          {/* Amount left */}
+          <div className="flex flex-col lg:flex-row items-center justify-center  mt-4 py-4  px-8">
+            <span className="text-3xl lg:mr-8">
+              {contextState.currentSupply}/3333
+            </span>
+            <span className="text-xl uppercase">Hamsters Minted</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

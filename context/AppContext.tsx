@@ -11,19 +11,30 @@ type Meta = {
   image: string;
   id: string | number;
 };
+type Popup = {
+  isLoading: boolean;
+  message: string;
+  isError: boolean;
+  txHash: string;
+  show: boolean;
+};
 
 type Context = {
   isLoading: boolean;
   isFantom: boolean;
   showPopup: boolean;
   isPaused: boolean;
+  saleStats: number;
   addr: string;
   price: any;
   currentSupply: number;
+  presaleStart: number;
+  saleStart: number;
   isConnected: boolean;
+  popupState: Popup;
   metas: any;
-  macawContract: any;
-  macawContractSigner: any;
+  hamContract: any;
+  hamContractSigner: any;
   txHash: string;
 };
 
@@ -33,13 +44,23 @@ const initialContext = {
     isFantom: true,
     showPopup: false,
     isPaused: true,
+    saleStats: 0,
     addr: "",
     price: 0,
     currentSupply: 0,
+    presaleStart: 0,
+    saleStart: 0,
     isConnected: false,
+    popupState: {
+      isLoading: true,
+      txHash: "",
+      isError: false,
+      message: "",
+      show: false,
+    },
     metas: [],
-    macawContract: null,
-    macawContractSigner: null,
+    hamContract: null,
+    hamContractSigner: null,
     txHash: "",
   },
   setContextState: (state: Context) => {},
