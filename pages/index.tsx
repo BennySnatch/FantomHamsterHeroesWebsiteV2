@@ -62,7 +62,7 @@ const Home: NextPage = () => {
     let network = await provider.getNetwork();
     await provider.send("eth_requestAccounts", []);
 
-    if (network.chainId != 4002) {
+    if (network.chainId != 250) {
       window.alert("Switch to Fantom to continue");
       setContextState({ ...contextState, isFantom: false, isConnected: true });
       return;
@@ -136,18 +136,20 @@ const Home: NextPage = () => {
 
       <main className=" min-h-screen flex flex-col items-center justify-center max-w-screen-xl ">
         <nav className="absolute top-0 h-20 flex flex-row items-center justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
-          <div className="items-center justify-center">
-            <img
-              className="h-12 hidden lg:flex"
-              src="/assets/images/logo.png"
-              alt=""
-            />
-            <img
-              className="h-16 lg:hidden"
-              src="/assets/images/FantomHAM_LOGO.png"
-              alt=""
-            />
-          </div>
+          <Link href="/">
+            <div className="items-center justify-center cursor-pointer">
+              <img
+                className="h-12 hidden lg:flex"
+                src="/assets/images/logo.png"
+                alt=""
+              />
+              <img
+                className="h-16 lg:hidden"
+                src="/assets/images/FantomHAM_LOGO.png"
+                alt=""
+              />
+            </div>
+          </Link>
           <div className="flex items-center justify-between lg:justify-end lg:w-full ">
             <div
               className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer"

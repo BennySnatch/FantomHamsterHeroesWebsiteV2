@@ -19,7 +19,6 @@ function CountdownTimer({ time, type }: { time: number; type: string }) {
   );
 
   function countdownComplete() {
-    // window.location.reload();
     const saleStats = contextState.saleStats + 1;
     setContextState({
       ...contextState,

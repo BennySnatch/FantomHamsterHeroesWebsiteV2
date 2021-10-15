@@ -27,8 +27,9 @@ export const saleStatus = async function (contract: any) {
 };
 
 export const getOwnedIDs = async function (contract: any, addr: string) {
-  let ids = await contract.macawsOwned(addr);
-  return ids;
+  let ids = await contract.hamstersOwned(addr);
+  const ownedIds = ids.map((id: any) => BigNumber.from(id).toNumber());
+  return ownedIds;
 };
 
 export const buyHams = async function (contract: any, price: any, amount: any) {

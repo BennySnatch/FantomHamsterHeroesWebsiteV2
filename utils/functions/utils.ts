@@ -7,7 +7,7 @@ export function trimHash(addr: string) {
   return trimmed;
 }
 export function hashToLink(hash: string) {
-  const link = "https://testnet.ftmscan.com/tx/" + hash;
+  const link = "https://.ftmscan.com/tx/" + hash;
   return link;
 }
 export function uriToLink(uri: string) {
@@ -34,5 +34,5 @@ export async function metadataFromId(id: string) {
   return meta;
 }
 
-export const presaleTime = 1634305369;
-export const saleTime = 1634305409;
+export const presaleTime = 1634392800;
+export const saleTime = 1634400000;
