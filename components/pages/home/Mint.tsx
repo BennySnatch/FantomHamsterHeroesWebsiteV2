@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../context/AppContext";
 import {
   buyHams,
@@ -13,8 +13,9 @@ function Mint() {
   const [isMinting, setIsMinting] = useState(false);
   const { contextState, setContextState } = useContext(AppContext);
 
-  const saleStats =
-    Date.now() > 1633951115000 ? 2 : Date.now() > 1633948824000 ? 1 : 0;
+  // useEffect(() => {
+  //   getSaleStats();
+  // }, [completed]);
 
   type Popup = {
     isLoading: boolean;
@@ -37,7 +38,7 @@ function Mint() {
         ...contextState,
         popupState,
       });
-      if (saleStats == 1) {
+      if (contextState.saleStats == 1) {
         try {
           const txHash = await buyWhitelistedHams(
             contextState.hamContractSigner,
@@ -94,7 +95,7 @@ function Mint() {
           const popupState: Popup = {
             isLoading: false,
             isError: true,
-            message: e.data.message,
+            message: e.message,
             txHash: "",
             show: true,
           };
@@ -104,16 +105,11 @@ function Mint() {
           });
         }
       }
-      // const currentSupply = await getSupply(contextState.hamContract);
-      // setContextState({
-      //   ...contextState,
-      //   currentSupply,
-      // });
     }
   }
 
   function increment() {
-    if (saleStats == 1 ? buyAmount < 2 : buyAmount < 5) {
+    if (contextState.saleStats == 1 ? buyAmount < 2 : buyAmount < 5) {
       setBuyAmount(buyAmount + 1);
     }
   }
@@ -130,55 +126,57 @@ function Mint() {
         Mint A Hamster
       </h2>
 
-      <CountdownTimer />
+      <CountdownTimer type="Presale" time={1634231165 * 1000} />
 
-      <div className="flex flex-col items-center">
-        <div className="flex ">
-          <div className="flex items-center justify-center mr-8 text-8xl text-center font-bold text-blackish w-40">
-            {buyAmount}
+      {contextState.saleStats != 0 && (
+        <div className="flex flex-col items-center">
+          <div className="flex ">
+            <div className="flex items-center justify-center mr-8 text-8xl text-center font-bold text-blackish w-40">
+              {buyAmount}
+            </div>
+
+            <div className="flex flex-col space-y-2">
+              <div
+                className="w-10 h-10  text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center mb-2 font-bold p-2 rounded-lg cursor-pointer"
+                onClick={() => increment()}
+              >
+                +
+              </div>
+              <div
+                className="w-10 h-10 text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center font-bold p-2 rounded-lg cursor-pointer"
+                onClick={() => decrement()}
+              >
+                -
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-col space-y-2">
-            <div
-              className="w-10 h-10  text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center mb-2 font-bold p-2 rounded-lg cursor-pointer"
-              onClick={() => increment()}
-            >
-              +
-            </div>
-            <div
-              className="w-10 h-10 text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center font-bold p-2 rounded-lg cursor-pointer"
-              onClick={() => decrement()}
-            >
-              -
-            </div>
+          {/* Mint Button */}
+          <div
+            className="flex items-center justify-center bg-blackish rounded-md py-2 mt-8 px-12 cursor-pointer"
+            onClick={handleMint}
+          >
+            {contextState.saleStats == 1 && (
+              <span className="text-4xl text-beige uppercase tracking-[2px] ">
+                Mint Whitelist
+              </span>
+            )}
+            {contextState.saleStats == 2 && (
+              <span className="text-4xl text-beige uppercase tracking-[12px] mx-4 ">
+                Mint
+              </span>
+            )}
+          </div>
+
+          {/* Amount left */}
+          <div className="flex flex-col lg:flex-row items-center justify-center  mt-4 py-4  px-8">
+            <span className="text-3xl lg:mr-8">
+              {contextState.currentSupply}/3333
+            </span>
+            <span className="text-xl uppercase">Hamsters Minted</span>
           </div>
         </div>
-
-        {/* Mint Button */}
-        <div
-          className="flex items-center justify-center bg-blackish rounded-md py-2 mt-8 px-12 cursor-pointer"
-          onClick={handleMint}
-        >
-          {saleStats == 1 && (
-            <span className="text-4xl text-beige uppercase tracking-[2px] ">
-              Mint Whitelist
-            </span>
-          )}
-          {saleStats == 2 && (
-            <span className="text-4xl text-beige uppercase tracking-[12px] mx-4 ">
-              Mint
-            </span>
-          )}
-        </div>
-
-        {/* Amount left */}
-        <div className="flex flex-col lg:flex-row items-center justify-center  mt-4 py-4  px-8">
-          <span className="text-3xl lg:mr-8">
-            {contextState.currentSupply}/3333
-          </span>
-          <span className="text-xl uppercase">Hamsters Minted</span>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

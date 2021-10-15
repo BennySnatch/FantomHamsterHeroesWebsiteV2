@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Countdown from "react-countdown";
 
 import { AppContext } from "../context/AppContext";
+import { getPresale, getSale } from "../utils/functions/HamFunctions";
 
-function CountdownTimer() {
-  const { contextState, setContextState } = useContext(AppContext);
-
+function CountdownTimer({ time, type }: { time: number; type: string }) {
   const Completionist = () => (
-    <span className="text-purple-700 text-4xl mb-4 font-semibold">
-      {contextState.isPaused
-        ? "Sale is not live"
-        : contextState.currentSupply == 700
-        ? "The sale is over"
-        : "Sale is Live"}
-    </span>
+    <div>
+      {/* {contextState.saleStats == 1 && (
+        <span className="text-purple-500 text-4xl mb-4 font-semibold">
+          {type} is Live
+        </span>
+      )} */}
+    </div>
   );
 
   // Renderer callback with condition
@@ -31,12 +30,12 @@ function CountdownTimer() {
     completed: any;
   }) => {
     if (completed) {
-      return <Completionist />;
+      return null;
     } else {
       // Render a countdown
       return (
         <div className="flex flex-col items-center justify-center py-24">
-          <span className="text-5xl">Presale Starts In</span>
+          <span className="text-5xl">{type} Starts In</span>
 
           <div className="flex flex-col lg:flex-row items-center justify-center ">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 py-8">
@@ -83,8 +82,9 @@ function CountdownTimer() {
   };
   return (
     <div>
+      {/* //1634392800000 */}
       <span className="text-blackish text-3xl mb-4 font-semibold">
-        <Countdown date={1634392800000} renderer={renderer} />
+        <Countdown date={time} renderer={renderer} />
       </span>
     </div>
   );

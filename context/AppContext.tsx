@@ -24,9 +24,12 @@ type Context = {
   isFantom: boolean;
   showPopup: boolean;
   isPaused: boolean;
+  saleStats: number;
   addr: string;
   price: any;
   currentSupply: number;
+  presaleStart: number;
+  saleStart: number;
   isConnected: boolean;
   popupState: Popup;
   metas: any;
@@ -41,9 +44,12 @@ const initialContext = {
     isFantom: true,
     showPopup: false,
     isPaused: true,
+    saleStats: 0,
     addr: "",
     price: 0,
     currentSupply: 0,
+    presaleStart: 0,
+    saleStart: 0,
     isConnected: false,
     popupState: {
       isLoading: true,

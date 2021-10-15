@@ -19,7 +19,9 @@ import Footer from "../components/pages/home/Footer";
 import { HAM_ABI, HAM_ADDRESS } from "../utils/contracts/HamContract";
 
 import {
+  getPresale,
   getPrice,
+  getSale,
   getSupply,
   saleStatus,
 } from "../utils/functions/HamFunctions";
@@ -72,12 +74,24 @@ const Home: NextPage = () => {
     const price = await getPrice(hamContract);
     const currentSupply = await getSupply(hamContract);
     const isPaused = await saleStatus(hamContract);
+    const presaleStart = await getPresale(hamContract);
+    const saleStart = await getSale(hamContract);
+    const saleStats =
+      Date.now() > saleStart * 1000
+        ? 2
+        : Date.now() > presaleStart * 1000
+        ? 1
+        : 0;
+
     setContextState({
       ...contextState,
       addr,
       price,
       isPaused,
       currentSupply,
+      presaleStart,
+      saleStart,
+      saleStats,
       isLoading: false,
       isConnected: true,
       hamContract,
