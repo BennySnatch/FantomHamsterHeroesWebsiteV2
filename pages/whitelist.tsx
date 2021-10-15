@@ -14,17 +14,8 @@ import { AppContext } from "../context/AppContext";
 import Popup from "../components/Popup";
 
 import Footer from "../components/pages/home/Footer";
-import { HAM_ABI, HAM_ADDRESS } from "../utils/contracts/HamContract";
 
-import {
-  getPrice,
-  getSupply,
-  saleStatus,
-} from "../utils/functions/HamFunctions";
-import Roadmap from "../components/pages/home/Roadmap";
 import Socials from "../components/pages/home/Socials";
-import Marquee from "../components/pages/home/Marquee";
-import Ham from "../components/pages/home/Ham";
 import { whitelisted } from "../utils/whitelisted";
 
 declare let window: any;
@@ -70,12 +61,6 @@ const Home: NextPage = () => {
     }
 
     let signer = provider.getSigner();
-    const macawContract = new ethers.Contract(HAM_ADDRESS, HAM_ABI, provider);
-    const macawContractSigner = new ethers.Contract(
-      HAM_ADDRESS,
-      HAM_ABI,
-      signer
-    );
 
     const addr = await signer.getAddress();
     setAddress(addr);
@@ -84,8 +69,6 @@ const Home: NextPage = () => {
       addr,
       isLoading: false,
       isConnected: true,
-      macawContract,
-      macawContractSigner,
     });
   }
 
