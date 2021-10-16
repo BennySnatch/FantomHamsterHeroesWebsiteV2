@@ -34,5 +34,5 @@ export async function metadataFromId(id: string) {
   return meta;
 }
 
-export const presaleTime = 1634368893;
+export const presaleTime = 1634369793;
 export const saleTime = 1634372893;
