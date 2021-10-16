@@ -23,84 +23,82 @@ function Mint() {
   };
 
   async function handleMint() {
-    if (contextState.isFantom && !contextState.isPaused) {
-      const popupState: Popup = {
-        isLoading: true,
-        isError: false,
-        message: "",
-        txHash: "",
-        show: true,
-      };
-      setContextState({
-        ...contextState,
-        popupState,
-      });
-      if (contextState.saleStats == 1) {
-        try {
-          const txHash = await buyWhitelistedHams(
-            contextState.hamContractSigner,
-            contextState.price,
-            buyAmount
-          );
-          const currentSupply = await getSupply(contextState.hamContract);
-          const popupState: Popup = {
-            isLoading: false,
-            isError: false,
-            message: "",
-            txHash,
-            show: true,
-          };
-          setContextState({
-            ...contextState,
-            popupState,
-            currentSupply,
-          });
-        } catch (e: any) {
-          const popupState: Popup = {
-            isLoading: false,
-            isError: true,
-            message: e.data.message,
-            txHash: "",
-            show: true,
-          };
-          setContextState({
-            ...contextState,
-            popupState,
-          });
-        }
-      } else {
-        try {
-          const txHash = await buyHams(
-            contextState.hamContractSigner,
-            contextState.price,
-            buyAmount
-          );
-          const currentSupply = await getSupply(contextState.hamContract);
-          const popupState: Popup = {
-            isLoading: false,
-            isError: false,
-            message: "",
-            txHash,
-            show: true,
-          };
-          setContextState({
-            ...contextState,
-            popupState,
-            currentSupply,
-          });
-        } catch (e: any) {
-          const popupState: Popup = {
-            isLoading: false,
-            isError: true,
-            message: e.message,
-            txHash: "",
-            show: true,
-          };
-          setContextState({
-            ...contextState,
-            popupState,
-          });
-        }
+    const popupState: Popup = {
+      isLoading: true,
+      isError: false,
+      message: "",
+      txHash: "",
+      show: true,
+    };
+    setContextState({
+      ...contextState,
+      popupState,
+    });
+    if (contextState.saleStats == 1) {
+      try {
+        const txHash = await buyWhitelistedHams(
+          contextState.hamContractSigner,
+          contextState.price,
+          buyAmount
+        );
+        const currentSupply = await getSupply(contextState.hamContract);
+        const popupState: Popup = {
+          isLoading: false,
+          isError: false,
+          message: "",
+          txHash,
+          show: true,
+        };
+        setContextState({
+          ...contextState,
+          popupState,
+          currentSupply,
+        });
+      } catch (e: any) {
+        const popupState: Popup = {
+          isLoading: false,
+          isError: true,
+          message: e.data.message,
+          txHash: "",
+          show: true,
+        };
+        setContextState({
+          ...contextState,
+          popupState,
+        });
+      }
+    } else {
+      try {
+        const txHash = await buyHams(
+          contextState.hamContractSigner,
+          contextState.price,
+          buyAmount
+        );
+        const currentSupply = await getSupply(contextState.hamContract);
+        const popupState: Popup = {
+          isLoading: false,
+          isError: false,
+          message: "",
+          txHash,
+          show: true,
+        };
+        setContextState({
+          ...contextState,
+          popupState,
+          currentSupply,
+        });
+      } catch (e: any) {
+        const popupState: Popup = {
+          isLoading: false,
+          isError: true,
+          message: e.message,
+          txHash: "",
+          show: true,
+        };
+        setContextState({
+          ...contextState,
+          popupState,
+        });
       }
     }
   }
