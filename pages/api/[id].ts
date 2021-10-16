@@ -16,8 +16,8 @@ const paperApi = async (req: any, res: any) => {
   const provider = new ethers.providers.JsonRpcProvider(
     "https://rpc.ftm.tools/"
   );
-  const HAMSTER_ADDRESS = "0xE260BED39020f969BD66b4E2ffcc3c5A34B46A41";
-  const hamContract = new ethers.Contract(HAMSTER_ADDRESS, HAM_ABI, provider);
+  // const HAMSTER_ADDRESS = "0xE260BED39020f969BD66b4E2ffcc3c5A34B46A41";
+  const hamContract = new ethers.Contract(HAM_ADDRESS, HAM_ABI, provider);
   const supply = await getSupply(hamContract);
   await cors(req, res);
   const query = req.query.id;
