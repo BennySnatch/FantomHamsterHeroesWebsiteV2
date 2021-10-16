@@ -57,6 +57,7 @@ const Home: NextPage = () => {
       window.alert("You must install MetaMask to use this website");
       return;
     }
+
     setContextState({ ...contextState, isLoading: true });
     let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     let network = await provider.getNetwork();
