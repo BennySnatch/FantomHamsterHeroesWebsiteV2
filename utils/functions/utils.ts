@@ -7,7 +7,7 @@ export function trimHash(addr: string) {
   return trimmed;
 }
 export function hashToLink(hash: string) {
-  const link = "https://.ftmscan.com/tx/" + hash;
+  const link = "https://ftmscan.com/tx/" + hash;
   return link;
 }
 export function uriToLink(uri: string) {
