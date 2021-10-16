@@ -1,4 +1,4 @@
-export const whitelisted: { [key: string]: string } = {
+export const a = {
   "0x58A084dB3210330910779f3779d8156932a9d6ed": "DarthLordZuko#4568",
   "0x8c71798C28CE3a140CCafF6B69AB56Eea71E0276": "dannylux#6497",
   "0x86E66f29D92D011ddf4A73AE289961830d665da2": "cryptobulz#9731",
