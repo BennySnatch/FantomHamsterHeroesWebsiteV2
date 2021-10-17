@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import {
+  community_wallet,
+  getBalance,
   hashToLink,
   metadataFromUri,
   presaleTime,
@@ -43,6 +45,7 @@ const Home: NextPage = () => {
       return;
     }
     connectWallet();
+
     window.ethereum.on("accountsChanged", () => {
       connectWallet();
     });
@@ -53,6 +56,11 @@ const Home: NextPage = () => {
   }, []);
 
   async function connectWallet() {
+    // const balance: string = await getBalance(community_wallet);
+    // setContextState({
+    //   ...contextState,
+    //   balance,
+    // });
     if (!window.ethereum) {
       window.alert("You must install MetaMask to use this website");
       return;
@@ -152,6 +160,13 @@ const Home: NextPage = () => {
             </div>
           </Link>
           <div className="flex items-center justify-between lg:justify-end lg:w-full ">
+            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  HAM
+                </span>
+              </Link>
+            </div>
             <div
               className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer"
               onClick={() => connectWallet()}
@@ -168,7 +183,7 @@ const Home: NextPage = () => {
         </nav>
         <Hero />
         <Ham />
-        <Mint />
+        <Mint balance={contextState.balance} />
         <Marquee />
         <Gallery />
         <Roadmap />

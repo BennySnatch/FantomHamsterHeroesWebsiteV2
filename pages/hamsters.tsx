@@ -20,7 +20,12 @@ import Gallery from "../components/pages/home/Gallery";
 import Footer from "../components/pages/home/Footer";
 import { HAM_ABI, HAM_ADDRESS } from "../utils/contracts/HamContract";
 
-import { getOwnedIDs } from "../utils/functions/HamFunctions";
+import {
+  getOwnedIDs,
+  getRank,
+  getRarity,
+  getScore,
+} from "../utils/functions/HamFunctions";
 import Socials from "../components/pages/home/Socials";
 import { finalmeta } from "../utils/traitsfinal";
 
@@ -68,7 +73,7 @@ const Home: NextPage = () => {
     const addr = await signer.getAddress();
 
     const ownedIds = await getOwnedIDs(hamContract, addr);
-    console.log(ownedIds);
+    const [rank, score] = getRarity(12);
     setMyHams(ownedIds);
 
     setContextState({
@@ -106,6 +111,13 @@ const Home: NextPage = () => {
             </div>
           </Link>
           <div className="flex items-center justify-between lg:justify-end lg:w-full ">
+            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  HAM
+                </span>
+              </Link>
+            </div>
             <div
               className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer"
               onClick={() => connectWallet()}
@@ -127,13 +139,32 @@ const Home: NextPage = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {myHams.map((ham, index) => (
-              <div className="bg-blackish relative" key={index}>
+              <div className="bg-blackish relative rounded" key={index}>
                 <div>
-                  <img src={finalmeta[ham].image} alt="" />
+                  <img
+                    src={finalmeta[ham].image}
+                    alt={`Hamster Heroes #${ham}`}
+                  />
                 </div>
-                <div className="py-4 px-2 text-beige text-center text-3xl">
-                  Hamster Heroes
-                  <span className=" text-3xl"> #{ham}</span>
+
+                <div className="flex w-full justify-between px-2">
+                  <div className="flex  justify-center flex-col">
+                    <div className=" text-beige text-xl">
+                      Hamster Heroes
+                      <span className=" text-2xl"> #{ham}</span>
+                    </div>
+
+                    <div className=" text-beige text-xl">
+                      Score:
+                      <span className="ml-4 text-2xl">{getScore(ham)}</span>
+                    </div>
+                  </div>
+                  <div className=" flex items-center justify-center py-4 px-2 text-blackish text-center text-3xl  ">
+                    <div className="flex flex-col ml-4 text-3xl py-1 px-4 bg-beige rounded">
+                      <span className="text-3xl bg-beige">{getRank(ham)}</span>
+                      <span className="text-lg">RANK</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
