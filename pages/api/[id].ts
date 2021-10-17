@@ -13,16 +13,10 @@ const cors = initMiddleware(
 );
 
 const paperApi = async (req: any, res: any) => {
-  const provider = new ethers.providers.JsonRpcProvider(
-    "https://rpc.ftm.tools/"
-  );
-  const HAMSTER_ADDRESS = "0xE260BED39020f969BD66b4E2ffcc3c5A34B46A41";
-  const hamContract = new ethers.Contract(HAMSTER_ADDRESS, HAM_ABI, provider);
-  const supply = await getSupply(hamContract);
   await cors(req, res);
   const query = req.query.id;
 
-  if (query < supply) {
+  if (query < 3333) {
     const meta = finalmeta[query];
     const attributes = meta["attributes"];
 
@@ -35,14 +29,6 @@ const paperApi = async (req: any, res: any) => {
 
     res.statusCode = 200;
     res.send(newMeta);
-  } else if (query < 3333) {
-    const data = {
-      name: "Fantom Hamster Heroes #" + query,
-      metadata: "Yet to be minted",
-      image:
-        "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2076&q=80",
-    };
-    res.status(200).send(data);
   } else {
     res.status(200).send("Not found");
   }

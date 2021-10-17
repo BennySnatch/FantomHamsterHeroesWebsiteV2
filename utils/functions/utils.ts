@@ -36,3 +36,19 @@ export async function metadataFromId(id: string) {
 
 export const presaleTime = 1634392800;
 export const saleTime = 1634400000;
+
+export const ftmscan_api = "ZCUMS9JMEJEW8KIUZZK4F1XVQ6B29EH98X";
+export const community_wallet = "0xbCC771cFFC2DEabE62C03aDa1183b6279398C8Ed";
+
+export const base_url =
+  "https://api.ftmscan.com/api?module=account&action=balance&address=";
+
+export async function getBalance(addr: string) {
+  const res = await fetch(
+    base_url + addr + `&tag=latest&apikey=` + ftmscan_api
+  );
+
+  const supp = await res.json();
+  const bal: string = (supp.result / 1e18).toFixed(2);
+  return bal;
+}

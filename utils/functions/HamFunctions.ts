@@ -1,5 +1,8 @@
 import { ethers, BigNumber, Contract } from "ethers";
 import { formatUnits } from "ethers/lib/utils";
+import { rarityRanked } from "../../rarity";
+import { raritySerial } from "../rarityserial";
+import { finalmeta } from "../traitsfinal";
 import { metadataFromId, metadataFromUri } from "./utils";
 
 export const getSupply = async function (contract: any) {
@@ -89,4 +92,22 @@ export const getOwnedMetas = async function (ids: any) {
     uris.push(meta);
   }
   return uris;
+};
+
+export const getRarity = function (id: number) {
+  const rarity = rarityRanked[id];
+  return [rarity.rank, rarity.score];
+};
+export const getRank = function (id: number) {
+  const rarity = raritySerial[id];
+  return rarity.rank;
+};
+export const getScore = function (id: number) {
+  const rarity = raritySerial[id];
+  let score: number = rarity.score;
+  return score.toFixed(2);
+};
+export const getImage = function (id: number) {
+  const img = finalmeta[id].image;
+  return img;
 };

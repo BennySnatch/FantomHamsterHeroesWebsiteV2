@@ -22,6 +22,7 @@ type Popup = {
 type Context = {
   isLoading: boolean;
   isFantom: boolean;
+  balance: string;
   showPopup: boolean;
   isPaused: boolean;
   saleStats: number;
@@ -47,6 +48,7 @@ const initialContext = {
     saleStats: 0,
     addr: "",
     price: 0,
+    balance: "0",
     currentSupply: 0,
     presaleStart: 0,
     saleStart: 0,

@@ -1,182 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../context/AppContext";
-import {
-  buyHams,
-  buyWhitelistedHams,
-  getOwnedMetas,
-  getSupply,
-} from "../../../utils/functions/HamFunctions";
-import { presaleTime, saleTime } from "../../../utils/functions/utils";
-import CountdownTimer from "../../countdown";
+import { community_wallet, getBalance } from "../../../utils/functions/utils";
 
-function Mint() {
-  const [buyAmount, setBuyAmount] = useState(1);
-  const [isMinting, setIsMinting] = useState(false);
-  const { contextState, setContextState } = useContext(AppContext);
-
-  type Popup = {
-    isLoading: boolean;
-    message: string;
-    isError: boolean;
-    txHash: string;
-    show: boolean;
-  };
-
-  async function handleMint() {
-    const popupState: Popup = {
-      isLoading: true,
-      isError: false,
-      message: "",
-      txHash: "",
-      show: true,
-    };
-    setContextState({
-      ...contextState,
-      popupState,
-    });
-    if (contextState.saleStats == 1) {
-      try {
-        const txHash = await buyWhitelistedHams(
-          contextState.hamContractSigner,
-          contextState.price,
-          buyAmount
-        );
-        const currentSupply = await getSupply(contextState.hamContract);
-        const popupState: Popup = {
-          isLoading: false,
-          isError: false,
-          message: "",
-          txHash,
-          show: true,
-        };
-        setContextState({
-          ...contextState,
-          popupState,
-          currentSupply,
-        });
-      } catch (e: any) {
-        const popupState: Popup = {
-          isLoading: false,
-          isError: true,
-          message: e.data.message,
-          txHash: "",
-          show: true,
-        };
-        setContextState({
-          ...contextState,
-          popupState,
-        });
-      }
-    } else {
-      try {
-        const txHash = await buyHams(
-          contextState.hamContractSigner,
-          contextState.price,
-          buyAmount
-        );
-        const currentSupply = await getSupply(contextState.hamContract);
-        const popupState: Popup = {
-          isLoading: false,
-          isError: false,
-          message: "",
-          txHash,
-          show: true,
-        };
-        setContextState({
-          ...contextState,
-          popupState,
-          currentSupply,
-        });
-      } catch (e: any) {
-        const popupState: Popup = {
-          isLoading: false,
-          isError: true,
-          message: e.message,
-          txHash: "",
-          show: true,
-        };
-        setContextState({
-          ...contextState,
-          popupState,
-        });
-      }
-    }
-  }
-
-  function increment() {
-    if (contextState.saleStats == 1 ? buyAmount < 2 : buyAmount < 5) {
-      setBuyAmount(buyAmount + 1);
-    }
-  }
-
-  function decrement() {
-    if (buyAmount > 1) {
-      setBuyAmount(buyAmount - 1);
-    }
-  }
-
+function Mint({ balance }: { balance: string }) {
   return (
-    <div className="flex flex-col relative items-center  w-full py-8 ">
+    <div className="flex flex-col relative items-center  w-full py-24">
       <h2 className="text-[30px] lg:text-7xl text-center lg:text-left text-blackish font-bold leading-relaxed mt-12 lg:mt-0">
         Mint A Hamster
       </h2>
 
-      {contextState.saleStats == 0 && (
-        <CountdownTimer type="Presale" time={presaleTime * 1000} />
-      )}
-      {contextState.saleStats == 1 && (
-        <CountdownTimer type="Sale" time={saleTime * 1000} />
-      )}
+      <span className="text-xl max-w-3xl text-center py-8">
+        Launched on 16th October 2021, all 3,333 Hamster Heroes were sold out
+        within 15 hours - one of the most successful launches on the Fantom
+        blockchain. You can still buy a Hamster Hero off a secondary market at
+        PaintSwap.
+      </span>
 
-      {contextState.saleStats != 0 && (
-        <div className="flex flex-col items-center">
-          <div className="flex ">
-            <div className="flex items-center justify-center mr-8 text-8xl text-center font-bold text-blackish w-40">
-              {buyAmount}
-            </div>
+      <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+        <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+          <a href="https://paintswap.finance/marketplace/collections/0xe260bed39020f969bd66b4e2ffcc3c5a34b46a41">
+            View On Paintswap
+          </a>
+        </span>
+      </div>
 
-            <div className="flex flex-col space-y-2">
-              <div
-                className="w-10 h-10  text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center mb-2 font-bold p-2 rounded-lg cursor-pointer"
-                onClick={() => increment()}
-              >
-                +
-              </div>
-              <div
-                className="w-10 h-10 text-beige select-none bg-blackish hover:(text-white background-color[#0B193D]) text-4xl flex items-center justify-center font-bold p-2 rounded-lg cursor-pointer"
-                onClick={() => decrement()}
-              >
-                -
-              </div>
-            </div>
-          </div>
-
-          {/* Mint Button */}
-          <div
-            className="flex items-center justify-center bg-blackish rounded-md py-2 mt-8 px-12 cursor-pointer"
-            onClick={handleMint}
-          >
-            {contextState.saleStats == 1 && (
-              <span className="text-4xl text-beige uppercase tracking-[2px] ">
-                Mint Whitelist
-              </span>
-            )}
-            {contextState.saleStats == 2 && (
-              <span className="text-4xl text-beige uppercase tracking-[12px] mx-4 ">
-                Mint
-              </span>
-            )}
-          </div>
-
-          {/* Amount left */}
-          <div className="flex flex-col lg:flex-row items-center justify-center  mt-4 py-4  px-8">
-            <span className="text-3xl lg:mr-8">
-              {contextState.currentSupply}/3333
-            </span>
-            <span className="text-xl uppercase">Hamsters Minted</span>
-          </div>
-        </div>
-      )}
+      {/* <h2 className="text-[30px] lg:text-7xl text-center lg:text-left text-blackish font-bold leading-relaxed mt-12 lg:mt-0">
+        Hamster Heroes DAO
+      </h2>
+      <span>Current Funds</span>
+      <span>{balance} FTM</span> */}
     </div>
   );
 }
