@@ -137,9 +137,15 @@ const Home: NextPage = () => {
             My Hamster Heroes
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 place-items-center gap-8">
             {myHams.map((ham, index) => (
-              <div className="bg-blackish relative rounded" key={index}>
+              <div
+                className="bg-blackish relative rounded p-2 max-w-xs"
+                key={index}
+              >
+                <div className=" flex items-center w-full  py-1 text-beige text-center text-3xl  ">
+                  <span className="text-2xl ">#{getRank(ham)}</span>
+                </div>
                 <div>
                   <img
                     src={finalmeta[ham].image}
@@ -147,22 +153,16 @@ const Home: NextPage = () => {
                   />
                 </div>
 
-                <div className="flex w-full justify-between px-2">
+                <div className="flex w-full justify-between px-2 py-4">
                   <div className="flex  justify-center flex-col">
-                    <div className=" text-beige text-xl">
+                    <div className=" text-beige text-lg">
                       Hamster Heroes
-                      <span className=" text-2xl"> #{ham}</span>
+                      <span className=" text-xl"> #{ham}</span>
                     </div>
 
                     <div className=" text-beige text-xl">
                       Score:
                       <span className="ml-4 text-2xl">{getScore(ham)}</span>
-                    </div>
-                  </div>
-                  <div className=" flex items-center justify-center py-4 px-2 text-blackish text-center text-3xl  ">
-                    <div className="flex flex-col ml-4 text-3xl py-1 px-4 bg-beige rounded">
-                      <span className="text-3xl bg-beige">{getRank(ham)}</span>
-                      <span className="text-lg">RANK</span>
                     </div>
                   </div>
                 </div>

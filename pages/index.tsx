@@ -61,6 +61,7 @@ const Home: NextPage = () => {
     //   ...contextState,
     //   balance,
     // });
+    console.log("hello");
     if (!window.ethereum) {
       window.alert("You must install MetaMask to use this website");
       return;
