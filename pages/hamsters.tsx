@@ -146,7 +146,7 @@ const Home: NextPage = () => {
                 <div className=" flex items-center w-full  py-1 text-beige text-center text-3xl  ">
                   <span className="text-2xl ">#{getRank(ham)}</span>
                 </div>
-                <div>
+                <div className="min-h-[150px] rounded">
                   <img
                     src={finalmeta[ham].image}
                     alt={`Hamster Heroes #${ham}`}
