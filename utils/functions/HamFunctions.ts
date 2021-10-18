@@ -1,6 +1,6 @@
 import { ethers, BigNumber, Contract } from "ethers";
 import { formatUnits } from "ethers/lib/utils";
-import { rarityRanked } from "../../rarity";
+import { rarityRanked } from "../rarity";
 import { raritySerial } from "../rarityserial";
 import { finalmeta } from "../traitsfinal";
 import { metadataFromId, metadataFromUri } from "./utils";
@@ -102,9 +102,14 @@ export const getRank = function (id: number) {
   const rarity = raritySerial[id];
   return rarity.rank;
 };
+export const getId = function (rank: number) {
+  const rarity = rarityRanked[rank];
+  const id = rarity.id;
+  return id;
+};
 export const getScore = function (id: number) {
-  const rarity = raritySerial[id];
-  let score: number = rarity.score;
+  const rare = raritySerial[id];
+  let score: number = rare.score;
   return score.toFixed(2);
 };
 export const getImage = function (id: number) {

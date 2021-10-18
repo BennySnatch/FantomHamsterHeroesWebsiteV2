@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { trimAddress } from "../utils/functions/utils";
+import { trimAddress, trimImageURI } from "../utils/functions/utils";
 
 import { AppContext } from "../context/AppContext";
 import Footer from "../components/pages/home/Footer";
@@ -137,18 +137,27 @@ const Home: NextPage = () => {
                   <span className="text-2xl ml-2">#{getRank(ham)}</span>
                 </div>
                 <div className="min-h-[150px]">
-                  <img
-                    src={finalmeta[ham].image}
-                    alt={`Hamster Heroes #${ham}`}
-                    className="place"
-                  />
+                  {ham < 11 && (
+                    <img
+                      src={trimImageURI(finalmeta[ham].image) + `.gif`}
+                      alt={`Hamster Heroes #${ham}`}
+                      className="place"
+                    />
+                  )}
+                  {ham >= 11 && (
+                    <img
+                      src={trimImageURI(finalmeta[ham].image) + `.jpg`}
+                      alt={`Hamster Heroes #${ham}`}
+                      className="place"
+                    />
+                  )}
                 </div>
 
                 <div className="flex w-full justify-between px-2 py-4">
                   <div className="flex  justify-center flex-col">
                     <div className=" text-beige text-lg">
                       Hamster Heroes
-                      <span className=" text-xl"> #{ham}</span>
+                      <span className=" text-lg"> #{ham}</span>
                     </div>
 
                     <div className=" text-beige text-xl">

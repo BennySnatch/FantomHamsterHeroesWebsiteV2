@@ -3,13 +3,14 @@ import Head from "next/head";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { trimAddress } from "../utils/functions/utils";
+import { trimAddress, trimImageURI } from "../utils/functions/utils";
 
 import { AppContext } from "../context/AppContext";
 import Footer from "../components/pages/home/Footer";
 import { HAM_ABI, HAM_ADDRESS } from "../utils/contracts/HamContract";
 
 import {
+  getId,
   getOwnedIDs,
   getRank,
   getRarity,
@@ -17,12 +18,15 @@ import {
 } from "../utils/functions/HamFunctions";
 import Socials from "../components/pages/home/Socials";
 import { finalmeta } from "../utils/traitsfinal";
+import { rarityRanked } from "../utils/rarity";
 
 declare let window: any;
 
 const Home: NextPage = () => {
   const { contextState, setContextState } = useContext(AppContext);
-  const [myHams, setMyHams] = useState([]);
+
+  const [pageIndex, setPageIndex] = useState(1);
+  const [rank, setRank] = useState("");
 
   useEffect(() => {
     if (!window.ethereum) {
@@ -61,10 +65,6 @@ const Home: NextPage = () => {
 
     const addr = await signer.getAddress();
 
-    const ownedIds = await getOwnedIDs(hamContract, addr);
-    const [rank, score] = getRarity(12);
-    setMyHams(ownedIds);
-
     setContextState({
       ...contextState,
       addr,
@@ -73,6 +73,62 @@ const Home: NextPage = () => {
       hamContract,
       hamContractSigner,
     });
+  }
+
+  function increment() {
+    if (pageIndex < 112) {
+      setPageIndex(pageIndex + 1);
+    }
+  }
+
+  function decrement() {
+    if (pageIndex > 1) {
+      setPageIndex(pageIndex - 1);
+    }
+  }
+
+  const start = (pageIndex - 1) * 30;
+
+  var allHams = [];
+  for (var ham = start + 1; ham < start + 31 && ham <= 3333; ham++) {
+    allHams.push(
+      <div className="bg-blackish relative rounded p-2 max-w-xs" key={ham}>
+        <div className=" flex items-center w-full  py-1 text-beige text-center text-3xl  ">
+          <span className="text-2xl ">Rank </span>
+          <span className="text-2xl ml-2">#{ham}</span>
+        </div>
+        <div className="min-h-[150px]">
+          {ham <= 11 && (
+            <img
+              src={trimImageURI(finalmeta[getId(ham)].image) + `.gif`}
+              alt={`Hamster Heroes #${getId(ham)}`}
+              className="place"
+            />
+          )}
+          {ham > 11 && (
+            <img
+              src={trimImageURI(finalmeta[getId(ham)].image) + `.jpg`}
+              alt={`Hamster Heroes #${getId(ham)}`}
+              className="place"
+            />
+          )}
+        </div>
+
+        <div className="flex w-full justify-between px-2 py-4">
+          <div className="flex  justify-center flex-col">
+            <div className=" text-beige text-lg">
+              Hamster Heroes
+              <span className=" text-lg"> #{getId(ham)}</span>
+            </div>
+
+            <div className=" text-beige text-xl">
+              Score:
+              <span className="ml-4 text-2xl">{getScore(getId(ham))}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -121,44 +177,101 @@ const Home: NextPage = () => {
             <Socials />
           </div>
         </nav>
+
+        {/* Main Content */}
         <div className="flex flex-col flex-1 mt-24 px-4">
           <div className="text-4xl font-bold text-blackish text-center mb-8">
-            My Hamster Heroes
+            Hamster Heroes Rarity
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 place-items-center gap-8">
-            {myHams.map((ham, index) => (
-              <div
-                className="bg-blackish relative rounded p-2 max-w-xs"
-                key={index}
-              >
-                <div className=" flex items-center w-full  py-1 text-beige text-center text-3xl  ">
-                  <span className="text-2xl ">Rank </span>
-                  <span className="text-2xl ml-2">#{getRank(ham)}</span>
-                </div>
-                <div className="min-h-[150px]">
-                  <img
-                    src={finalmeta[ham].image}
-                    alt={`Hamster Heroes #${ham}`}
-                    className="place"
-                  />
-                </div>
+          {/* Individual Rank */}
+          <div className="flex items-center flex-col justify-center">
+            <div className="bg-blackish px-6 py-4 text-4xl">
+              <input
+                className="text-beige bg-transparent outline-none margin-0 appearance-none"
+                placeholder="Enter Id"
+                type="number"
+                min="0"
+                onChange={(e) => setRank(e.target.value)}
+              />
+            </div>
+            {/* Individual Id */}
+            {rank != "" && parseInt(rank) < 3333 && (
+              <div className="flex items-center justify-center py-12 max-w-[240px]">
+                <div
+                  className="bg-blackish relative rounded p-2 max-w-xs"
+                  key={rank}
+                >
+                  <div className=" flex items-center w-full  py-1 text-beige text-center text-3xl  ">
+                    <span className="text-2xl ">Rank </span>
+                    <span className="text-2xl ml-2">
+                      #{getRank(parseInt(rank))}
+                    </span>
+                  </div>
+                  <div className="min-h-[150px]">
+                    {parseInt(rank) < 11 && (
+                      <img
+                        src={
+                          trimImageURI(finalmeta[parseInt(rank)].image) + `.gif`
+                        }
+                        alt={`Hamster Heroes #${parseInt(rank)}`}
+                        className="place"
+                      />
+                    )}
+                    {parseInt(rank) >= 11 && (
+                      <img
+                        src={
+                          trimImageURI(finalmeta[parseInt(rank)].image) + `.jpg`
+                        }
+                        alt={`Hamster Heroes #${parseInt(rank)}`}
+                        className="place"
+                      />
+                    )}
+                  </div>
 
-                <div className="flex w-full justify-between px-2 py-4">
-                  <div className="flex  justify-center flex-col">
-                    <div className=" text-beige text-lg">
-                      Hamster Heroes
-                      <span className=" text-xl"> #{ham}</span>
-                    </div>
+                  <div className="flex w-full justify-between px-2 py-4">
+                    <div className="flex  justify-center flex-col">
+                      <div className=" text-beige text-lg">
+                        Hamster Heroes
+                        <span className=" text-lg"> #{parseInt(rank)}</span>
+                      </div>
 
-                    <div className=" text-beige text-xl">
-                      Score:
-                      <span className="ml-4 text-2xl">{getScore(ham)}</span>
+                      <div className=" text-beige text-xl">
+                        Score:
+                        <span className="ml-4 text-2xl">
+                          {getScore(parseInt(rank))}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
+            )}
+          </div>
+
+          {/* Pagination Indiactor */}
+          <div className="flex items-center justify-between select-none py-8">
+            <div>
+              {pageIndex > 1 && (
+                <div
+                  className="px-6 py-4 text-2xl bg-blackish text-beige cursor-pointer rounded"
+                  onClick={() => decrement()}
+                >
+                  Prev
+                </div>
+              )}
+            </div>
+            {pageIndex < 112 && (
+              <div
+                className="px-6 py-4 text-2xl bg-blackish text-beige cursor-pointer rounded"
+                onClick={() => increment()}
+              >
+                Next
+              </div>
+            )}
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-5 place-items-center gap-8">
+            {allHams}
           </div>
         </div>
         <Footer />

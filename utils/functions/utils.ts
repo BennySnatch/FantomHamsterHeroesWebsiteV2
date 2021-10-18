@@ -52,3 +52,9 @@ export async function getBalance(addr: string) {
   const bal: string = (supp.result / 1e18).toFixed(2);
   return bal;
 }
+
+export function trimImageURI(url: string) {
+  const urlLength = "https://gateway.pinata.cloud/ipfs/".length;
+  const trimmed = url.substr(urlLength, url.length);
+  return "/hamsters/" + trimmed;
+}
