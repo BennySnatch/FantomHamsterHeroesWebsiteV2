@@ -39,7 +39,7 @@ export const hatOptions = [
   { value: "No Hat", label: "No Hat" },
 ];
 
-export const weapons = [
+export const weaponOptions = [
   { value: "Crystal Staff", label: "Crystal Staff" },
   { value: "Trident", label: "Trident" },
   { value: "Scythe", label: "Scythe" },
@@ -67,7 +67,7 @@ export const weapons = [
   { value: "Knife", label: "Knife" },
   { value: "Money Bag", label: "Money Bag" },
 ];
-export const eyeColors = [
+export const eyeOptions = [
   { value: "Red-eyed", label: "Red-eyed" },
   { value: "Black-eyed", label: "Black-eyed" },
 ];

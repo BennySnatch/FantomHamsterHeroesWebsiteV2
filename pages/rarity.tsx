@@ -24,7 +24,22 @@ import {
 import Socials from "../components/pages/home/Socials";
 import { finalmeta } from "../utils/traitsfinal";
 import { rarityRanked } from "../utils/rarity";
-import { backgroundOptions, backOptions } from "../utils/traits";
+import {
+  backgroundOptions,
+  backOptions,
+  eyeOptions,
+  hatOptions,
+  skinOptions,
+  weaponOptions,
+} from "../utils/traits";
+
+type Filters = {
+  background: string;
+  back: string;
+  hat: string;
+  weapon: string;
+  eye: string;
+};
 
 const Home: NextPage = () => {
   const [pageIndex, setPageIndex] = useState(1);
@@ -42,9 +57,54 @@ const Home: NextPage = () => {
     }
   }
 
+  const [filters, setFilters] = useState<Filters>({
+    hat: "",
+    back: "",
+    background: "",
+    weapon: "",
+    eye: "",
+  });
+  const [traits, setTraits] = useState(["", "", "", "", "", "", ""]);
+
+  const [matching, setMatching] = useState<number[]>([]);
+
   const start = (pageIndex - 1) * 30;
 
+  function checkAttributes(id: any) {
+    const metaI = finalmeta[id];
+    let matches = false;
+    let counts = 0;
+    let exact = 0;
+    for (let i = 0; i < 7; i++) {
+      if (traits[i] != "") {
+        counts += 1;
+        if (traits[i] == metaI.attributes[i].value) {
+          matches = true;
+          exact += 1;
+          // console.log("Matches", traits[i]);
+        } else {
+          matches = false;
+          // console.log("Don't Matches", traits[i]);
+        }
+      }
+    }
+    return counts == exact;
+  }
+  function filterByAttributes() {
+    const matches: number[] = [];
+
+    for (let i = 0; i < 3333; i++) {
+      if (checkAttributes(i)) {
+        matches.push(i);
+      }
+    }
+    console.log(matches);
+    setMatching(matches);
+    // console.log("This one is", checkAttributes(12));
+  }
+
   var allHams = [];
+  var matchingHams = [];
   for (var ham = start + 1; ham < start + 31 && ham <= 3333; ham++) {
     allHams.push(
       <div className="bg-blackish relative rounded p-2 max-w-xs" key={ham}>
@@ -125,7 +185,10 @@ const Home: NextPage = () => {
 
         {/* Main Content */}
         <div className="flex flex-col flex-1 mt-24 px-4">
-          <div className="text-4xl font-bold text-blackish text-center mb-8">
+          <div
+            className="text-4xl font-bold text-blackish text-center mb-8"
+            onClick={filterByAttributes}
+          >
             Hamster Heroes Rarity
           </div>
 
@@ -136,12 +199,80 @@ const Home: NextPage = () => {
               {/* body */}
               <div>
                 <span className="text-sm text-blackish mb-4">Background</span>
-                <Select options={backgroundOptions} />
+                <Select
+                  options={backgroundOptions}
+                  onChange={(value) => {
+                    let t = traits;
+                    t[0] = value ? value.label : "";
+                    setTraits([...t]);
+                  }}
+                />
+              </div>
+              {/* hat */}
+              <div>
+                <span className="text-sm text-blackish mb-4">Hat</span>
+                <Select
+                  options={hatOptions}
+                  onChange={(value) => {
+                    let t = traits;
+                    t[1] = value ? value.label : "";
+                    setTraits([...t]);
+                  }}
+                />
               </div>
               {/* back */}
               <div>
                 <span className="text-sm text-blackish mb-4">Back</span>
-                <Select options={backOptions} />
+                <Select
+                  options={backOptions}
+                  // onChange={(value) =>
+                  //   setFilters({
+                  //     ...filters,
+                  //     back: value ? value.label : "",
+                  //   })
+                  // }
+                  onChange={(value) => {
+                    let t = traits;
+                    t[2] = value ? value.label : "";
+                    setTraits([...t]);
+                  }}
+                />
+              </div>
+              {/* Eyes */}
+              <div>
+                <span className="text-sm text-blackish mb-4">Eyes</span>
+                <Select
+                  options={eyeOptions}
+                  onChange={(value) => {
+                    let t = traits;
+                    t[3] = value ? value.label : "";
+                    setTraits([...t]);
+                  }}
+                />
+              </div>
+              {/* Weapon */}
+              <div>
+                <span className="text-sm text-blackish mb-4">Weapon</span>
+                <Select
+                  options={weaponOptions}
+                  onChange={(value) => {
+                    let t = traits;
+                    t[4] = value ? value.label : "";
+                    setTraits([...t]);
+                  }}
+                />
+              </div>
+              {/* Skin */}
+              <div>
+                <span className="text-sm text-blackish mb-4">Skin</span>
+                <Select
+                  options={skinOptions}
+                  onChange={(value) => {
+                    let t = traits;
+                    t[6] = value ? value.label : "";
+                    setTraits([...t]);
+                  }}
+                />
               </div>
             </div>
 
@@ -169,7 +300,7 @@ const Home: NextPage = () => {
                 )}
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-4 place-items-center gap-8">
-                {allHams}
+                {matching.length == 0 ? allHams : <div></div>}
               </div>
             </div>
           </div>

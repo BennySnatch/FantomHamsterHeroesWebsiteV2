@@ -1,0 +1,604 @@
+[
+  {
+    "name": "Hamster Heroes #0",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Thistle",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Wizard’s Hat",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Red Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Wizard’s Staff",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Grey",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 0,
+    "image": "https://gateway.pinata.cloud/ipfs/QmdbptdopsTeZ5pyS9ne6NhhUg8wy19nU4qtZis9JeGDFX"
+  },
+  {
+    "name": "Hamster Heroes #1",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Orange",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Barbarian's Helm",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Red Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Barbarian’s Axe",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "skin",
+        "value": "Beige",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 1,
+    "image": "https://gateway.pinata.cloud/ipfs/QmWBbWxi6gWPUZbSfY43NWejJtfohkiaRSKc6gGJeJXFLY"
+  },
+
+  {
+    "name": "Hamster Heroes #2",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Pink",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Bard’s Cap Forward",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Brown Backpack",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Bard’s Guitar",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "skin",
+        "value": "Beige",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 2,
+    "image": "https://gateway.pinata.cloud/ipfs/QmUWGqkKZcuKe4wnQC914WnvPwvQyqKN9XsA4ZWpe91FEu"
+  },
+  {
+    "name": "Hamster Heroes #3",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Pink",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Cleric’s Hat",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "White Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Cleric’s Staff",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Mink Blue",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 3,
+    "image": "https://gateway.pinata.cloud/ipfs/QmeiQM4XGFkto51h8rxUyxAXYnk1zeSR37pNjFBco8JbpD"
+  },
+  {
+    "name": "Hamster Heroes #4",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Pink",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Cleric’s Hat",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "White Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Cleric’s Staff",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Mink Blue",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 4,
+    "image": "https://gateway.pinata.cloud/ipfs/QmZCfs6PruXVt9bi1UHRJTX671w3iQWrskgfAgzvmFz1Bq"
+  },
+  {
+    "name": "Hamster Heroes #5",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Purple",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Fighter’s Galea",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Red Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Fighter’s Sword",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Grey",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 5,
+    "image": "https://gateway.pinata.cloud/ipfs/QmRLd1w6977SAKsjZkcTVBduSNGmi2qSY2bMLSJnt3VZ7o"
+  },
+  {
+    "name": "Hamster Heroes #6",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Thistle",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Monk’s Bald Head",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Back Basket",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Monk’s Spell-book",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Chocolate",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 6,
+    "image": "https://gateway.pinata.cloud/ipfs/QmYFm4squxvn1DLJjeYhxMVFMqhuzRwCvZUDLrj3Lkjmbp"
+  },
+  {
+    "name": "Hamster Heroes #7",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Purple",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Paladin’s Helm",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "White Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Paladin’s Shield",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Cream",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 7,
+    "image": "https://gateway.pinata.cloud/ipfs/QmXFAaEDSL5Me9a1GeP24mPcWxgi4yuNUU7oSoK7dvoPHp"
+  },
+  {
+    "name": "Hamster Heroes #8",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Green",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Ranger’s Hat",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Brown Backpack",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Ranger’s Bow & Arrow",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Cream",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 8,
+    "image": "https://gateway.pinata.cloud/ipfs/QmTFXj93yv74oNSF758JeF5y4D5NerPxby9q4ge54NSjpF"
+  },
+  {
+    "name": "Hamster Heroes #9",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Coral",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Rogue’s Mask",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Black Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Rogue’s Daggers",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Albino",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 9,
+    "image": "https://gateway.pinata.cloud/ipfs/QmY31w3m26r7DoTfxZiFMW4pA8yoEFiJyANtERmXZ7RJuu"
+  },
+
+  {
+    "name": "Hamster Heroes #10",
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Orange",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Sorcerer’s Flames",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Back",
+        "value": "Black Cape",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Sorcerer’s Wand",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Mink Blue",
+        "count": 1,
+        "frequency": 0.00030003
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "Bobbing Head",
+        "count": 1,
+        "frequency": 0.00030003
+      }
+    ],
+    "tokenId": 10,
+    "image": "https://gateway.pinata.cloud/ipfs/QmWr1FZLJqanuDSqvVpFtu6PsYPc7DdWzrQJiNWrjJvop7"
+  },
+  {
+    "description": "Fantom Hamster Heroes is a collection of 3333 uniquely and randomly generated NFTs stored on the Fantom Blockchain.",
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Coral",
+        "count": 565,
+        "frequency": 17.007826610475618
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Beanie",
+        "count": 244,
+        "frequency": 7.344972907886815
+      },
+      {
+        "trait_type": "Back",
+        "value": "Red Cape",
+        "count": 433,
+        "frequency": 13.034316676700783
+      },
+      {
+        "trait_type": "Eye",
+        "value": "Black-eyed",
+        "count": 3221,
+        "frequency": 96.95966285370258
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Hammer",
+        "count": 176,
+        "frequency": 5.298013245033113
+      },
+      {
+        "trait_type": "Bobbing Head",
+        "value": "None",
+        "count": 3322,
+        "frequency": 99.669966996
+      },
+      {
+        "trait_type": "Skin",
+        "value": "Chocolate",
+        "count": 507,
+        "frequency": 15.261890427453343
+      }
+    ],
+    "tokenId": 11,
+    "name": "Hamster Heroes #11",
+    "image": "https://gateway.pinata.cloud/ipfs/QmPDbFwmoMX886kmPtNTs879r2mBmxu29MMrXkEBUkpzgj"
+  }
+]
