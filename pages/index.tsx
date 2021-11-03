@@ -139,7 +139,7 @@ const Home: NextPage = () => {
         <title>Fantom Hamster Heroes </title>
         <meta
           name="description"
-          content="Hamster Armies are a collection of randomly generated NFTs on the Fantom Blockchain"
+          content="Hamster Heroes are a collection of randomly generated NFTs on the Fantom Blockchain"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
