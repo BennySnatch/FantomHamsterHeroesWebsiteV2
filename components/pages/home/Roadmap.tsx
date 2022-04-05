@@ -3,7 +3,7 @@ import React from "react";
 const roadMapData = [
   {
     amt: 10,
-    info: "<b>Holder Incentives<\b>: AMAs, games, and giveaways for holders.",
+    info: "<b>Holder Incentives:</b> AMAs, games, and giveaways for holders.",
   },
   {
     amt: 15,
