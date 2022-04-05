@@ -10,6 +10,14 @@ const roadMapData = [
     info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
   },
   {
+    amt: 25,
+    info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
+  },
+  {
+    amt: 25,
+    info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
+  },
+  {
     amt: 50,
     info: "Have all 3,333 NFTs attributes visible on the new Fantom wallet with rarity rank displayed on website.",
   },
