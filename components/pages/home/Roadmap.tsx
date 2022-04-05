@@ -3,27 +3,27 @@ import React from "react";
 const roadMapData = [
   {
     amt: 10,
-    info: "<b>Holder Incentives:</b> AMAs, games, and giveaways for holders.",
+    info: "Holder Incentives: AMAs, games, and giveaways.",
   },
   {
     amt: 15,
-    info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
+    info: "Fantom Hamster Heroes Interpretations: Collection of 1/1 Fantom Hamster Heroes inspired pieces for auction from new and established artists.",
   },
   {
     amt: 20,
-    info: "Smashing.",
+    info: "?.",
   },
   {
     amt: 25,
-    info: "Delicious.",
+    info: "Splintered Portent: A Fantom Hamster Heroes Collection: Gen 2 collection. Free mint for Gen 0 holders.",
   },
   {
     amt: 50,
-    info: "Have all 3,333 NFTs attributes visible on the new Fantom wallet with rarity rank displayed on website.",
+    info: "?",
   },
   {
     amt: 75,
-    info: "Exclusive merchandise for Hamster Heroes holders.",
+    info: "Voxel Hamsters: Metaverse-ready. Free mint for Gen 0 holders.",
   },
 ];
 
