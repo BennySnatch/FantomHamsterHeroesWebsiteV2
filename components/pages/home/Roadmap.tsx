@@ -3,7 +3,7 @@ import React from "react";
 const roadMapData = [
   {
     amt: 10,
-    info: "To sell-out all hamsters so that resellers can be protected on the secondary market.",
+    info: "<b>Holder Incentives<\b>: AMAs, games, and giveaways for holders.",
   },
   {
     amt: 15,
