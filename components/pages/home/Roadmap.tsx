@@ -11,11 +11,11 @@ const roadMapData = [
   },
   {
     amt: 20,
-    info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
+    info: "Smashing.",
   },
   {
     amt: 25,
-    info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
+    info: "Delicious.",
   },
   {
     amt: 50,
@@ -41,7 +41,7 @@ function RoadmapItem({
       <div className=" flex border-l-0 border-blackish">
         <div className="flex items-center justify-center">
           <span className="text-blackish text-xl lg:text-2xl w-24 mx-2 flex items-center justify-center border-2 border-blackish bg-purple-400">
-            Phase {index}
+            Phase {index + 1}
           </span>
         </div>
         <span className="text-blackish text-sm lg:text-lg ml-4  w-full">
