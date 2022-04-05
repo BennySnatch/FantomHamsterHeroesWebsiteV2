@@ -6,11 +6,11 @@ const roadMapData = [
     info: "To sell-out all hamsters so that resellers can be protected on the secondary market.",
   },
   {
-    amt: 25,
+    amt: 15,
     info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
   },
   {
-    amt: 25,
+    amt: 20,
     info: "Verify all holders on Discord to form the DAO and make the first proposal on Snapshot (a voting system) with the funds from the community wallet.",
   },
   {
