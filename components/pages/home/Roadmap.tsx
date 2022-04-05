@@ -11,7 +11,7 @@ const roadMapData = [
   },
   {
     amt: 20,
-    info: "?.",
+    info: "?",
   },
   {
     amt: 25,
