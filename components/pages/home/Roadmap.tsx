@@ -85,7 +85,7 @@ function Roadmap() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-8  px-4">
-          {roadMapData.map((detail, item, index) => (
+          {roadMapData.map((item, index) => (
             <RoadmapItem
               amt={item.amt}
               info={item.info}
