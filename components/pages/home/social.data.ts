@@ -9,14 +9,14 @@ export const socialdata = [
     },
     {
         name: "medium",
-        link: "https://medium.com/@fantomhamsterheroes"
+        link: "https://fantomhamsterheroes.medium.com"
     },
     {
         name: "NFTkey",
-        link: "https://medium.com/@fantomhamsterheroes"
+        link: "https://nftkey.app/collections/fantomham"
     },
     {
         name: "PaintSwap",
-        link: "https://medium.com/@fantomhamsterheroes"
+        link: "https://paintswap.finance/marketplace/collections/0xe260bed39020f969bd66b4e2ffcc3c5a34b46a41"
     },
 ]
