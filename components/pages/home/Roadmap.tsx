@@ -14,7 +14,7 @@ const roadMapData = [
   {
     amt: 20,
     info: "?",
-    detail: "",
+    detail: "TBA",
   },
   {
     amt: 25,
@@ -24,7 +24,7 @@ const roadMapData = [
   {
     amt: 50,
     info: "?",
-    detail: "",
+    detail: "TBA",
   },
   {
     amt: 75,
@@ -85,13 +85,12 @@ function Roadmap() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-8  px-4">
-          {roadMapData.map((item, detail, index) => (
+          {roadMapData.map((item, index) => (
             <RoadmapItem
               amt={item.amt}
               info={item.info}
               key={index}
               index={index}
-              detail={detail.detail}
             />
           ))}
         </div>
