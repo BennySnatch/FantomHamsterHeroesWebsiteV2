@@ -19,6 +19,16 @@ function Footer() {
           {socialdata[2].name}
         </a>
       </span>
+      <span className="text-lg lg:text-2xl text-blackish uppercase cursor-pointer hover:text-gray-700">
+        <a href={socialdata[2].link} rel="noreferrer" target="_blank">
+          {socialdata[3].name}
+        </a>
+      </span>
+      <span className="text-lg lg:text-2xl text-blackish uppercase cursor-pointer hover:text-gray-700">
+        <a href={socialdata[2].link} rel="noreferrer" target="_blank">
+          {socialdata[4].name}
+        </a>
+      </span>
     </div>
   );
 }
