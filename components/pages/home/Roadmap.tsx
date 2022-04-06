@@ -7,7 +7,7 @@ const roadMapData = [
   },
   {
     amt: 15,
-    info: "Fantom Hamster Heroes Interpretations: Collection of 1/1 Fantom Hamster Heroes inspired pieces for auction from new and established artists.",
+    info: "<Text> <Text>This is a sentence</Text><Text style={{fontWeight: "bold"}}> with</Text> <Text> one word in bold</Text> </Text>",
   },
   {
     amt: 20,
