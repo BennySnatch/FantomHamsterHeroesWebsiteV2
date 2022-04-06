@@ -3,33 +3,33 @@ import React from "react";
 const roadMapData = [
   {
     amt: 10,
-    info: "Holder Incentives1:",
-    details: "AMAs, games, and giveaways.",
+    info: "Holder Incentives:",
+    detail: "AMAs, games, and giveaways.",
   },
   {
     amt: 15,
     info: "Fantom Hamster Heroes Interpretations:",
-    details: "A new collection of 1/1 Fantom Hamster Heroes inspired pieces for auction from new and established artists.",
+    detail: "A new collection of 1/1 Fantom Hamster Heroes inspired pieces for auction from new and established artists.",
   },
   {
     amt: 20,
     info: "?",
-    details: "",
+    detail: "",
   },
   {
     amt: 25,
     info: "Splintered Portent - A Fantom Hamster Heroes Collection:",
-    details: "Gen 2 collection. Free mint for Gen 0 holders.",
+    detail: "Gen 2 collection. Free mint for Gen 0 holders.",
   },
   {
     amt: 50,
     info: "?",
-    details: "",
+    detail: "",
   },
   {
     amt: 75,
     info: "Voxel Hamsters:",
-    details: "Metaverse-ready. Free mint for Gen 0 holders.",
+    detail: "Metaverse-ready. Free mint for Gen 0 holders.",
   },
 ];
 
