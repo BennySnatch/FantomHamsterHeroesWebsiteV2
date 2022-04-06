@@ -88,6 +88,7 @@ function Roadmap() {
           {roadMapData.map((item, index) => (
             <RoadmapItem
               amt={item.amt}
+              detail={item.detail}
               info={item.info}
               key={index}
               index={index}
