@@ -89,6 +89,7 @@ function Roadmap() {
             <RoadmapItem
               amt={item.amt}
               info={item.info}
+              detail={item.detail}
               key={index}
               index={index}
             />
