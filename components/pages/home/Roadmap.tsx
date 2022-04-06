@@ -53,7 +53,7 @@ function RoadmapItem({
           </span>
         </div>
         <span className="text-blackish text-sm lg:text-lg ml-4  w-full">
-          {info}
+          {detail}
           {index == 1 && (
             <a
               className="text-purple-500 ml-4 "
