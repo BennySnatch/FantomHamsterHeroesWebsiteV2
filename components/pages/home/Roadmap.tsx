@@ -89,9 +89,9 @@ function Roadmap() {
             <RoadmapItem
               amt={item.amt}
               info={item.info}
-              detail={item2.detail}
               key={index}
               index={index}
+              detail={item2.detail}
             />
           ))}
         </div>
