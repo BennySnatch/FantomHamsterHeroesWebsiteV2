@@ -148,16 +148,11 @@ const Home: NextPage = () => {
         <nav className="absolute top-0 h-20 flex flex-row items-center justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
           <Link href="/">
             <div className="items-center justify-center cursor-pointer">
-              <img
-                className="h-12 hidden lg:flex"
-                src="/assets/images/logo.png"
-                alt=""
-              />
-              <img
-                className="h-16 lg:hidden"
-                src="/assets/images/FantomHAM_LOGO.png"
-                alt=""
-              />
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  Home
+                </span>
+              </Link>
             </div>
           </Link>
           <div className="flex items-center justify-between lg:justify-end lg:w-full ">
@@ -171,7 +166,7 @@ const Home: NextPage = () => {
             <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
               <Link href="/hamsters">
                 <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-                  Roadmap1
+                  Roadmap
                 </span>
               </Link>
             </div>
