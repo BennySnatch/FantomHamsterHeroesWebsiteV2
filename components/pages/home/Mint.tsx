@@ -13,18 +13,24 @@ function Mint({ balance }: { balance: string }) {
         You can still buy a Hamster Hero off of the secondary market.
       </span>
       
-      <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
-        <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-          <a href="https://nftkey.app/collections/fantomham">
-            NFTKEY
-          </a>
-        </span>
-        <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-          <a href="https://paintswap.finance/marketplace/collections/0xe260bed39020f969bd66b4e2ffcc3c5a34b46a41">
-            PaintSwap
-          </a>
-        </span>
+      <div className="container">
+        <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+          <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+            <a href="https://nftkey.app/collections/fantomham">
+              NFTKEY
+            </a>
+          </span>
+          </div>
+          <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+          <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+            <a href="https://paintswap.finance/marketplace/collections/0xe260bed39020f969bd66b4e2ffcc3c5a34b46a41">
+              PaintSwap
+            </a>
+          </span>
+          </div>
       </div>
+
+
 
       {/* <h2 className="text-[30px] lg:text-7xl text-center lg:text-left text-blackish font-bold leading-relaxed mt-12 lg:mt-0">
         Hamster Heroes DAO
