@@ -186,9 +186,7 @@ const Home: NextPage = () => {
                   : "Connect"}
               </span>
             </div>
-
             <Socials />
-          </div>
         </nav>
         <Hero />
         <Ham />
