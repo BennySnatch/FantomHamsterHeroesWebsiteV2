@@ -139,7 +139,7 @@ const Home: NextPage = () => {
         <title>Fantom Hamster Heroes</title>
         <meta
           name="description"
-          content="Hamster Heroes are a collection of randomly generated NFTs on the Fantom Blockchain"
+          content="Hamster Heroes are a collection of randomly generated NFTs on Fantom"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -147,7 +147,7 @@ const Home: NextPage = () => {
       <main className=" min-h-screen flex flex-col items-center justify-center max-w-screen-xl ">
         <nav className="absolute top-0 h-20 flex flex-row items-center justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
           <Link href="/">
-            <div className="items-center justify-center cursor-pointer">
+            <div className="flex items-center justify-between lg:justify-end lg:w-full">
             <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
               <Link href="/hamsters">
                 <span className="text-gray-800 font-bold text-xl lg:text-2xl">
@@ -171,7 +171,7 @@ const Home: NextPage = () => {
             </div>
             </div>
           </Link>
-          <div className="flex items-center justify-between lg:justify-end lg:w-full ">
+          <div className="flex items-center justify-between lg:justify-end lg:w-full">
             <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
               <Link href="/hamsters">
                 <span className="text-gray-800 font-bold text-xl lg:text-2xl">
