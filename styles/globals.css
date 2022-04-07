@@ -14,7 +14,8 @@ body {
 }
 
 .acme {
-  font-family: "Acme";
+  font-family: "Olympian LT";
+  src: url('../public/assets/OlympianLTStd.otf');
 }
 .lato {
   font-family: "Lato";
