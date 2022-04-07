@@ -168,6 +168,7 @@ const Home: NextPage = () => {
                 </span>
               </Link>
             </div>
+            </div>
            <div className="flex items-center justify-between lg:justify-end lg:w-full ">
             <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
               <Link href="/hamsters">
@@ -175,6 +176,7 @@ const Home: NextPage = () => {
                   TEST
                 </span>
               </Link>
+            </div>
             </div>
             <div
               className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer"
