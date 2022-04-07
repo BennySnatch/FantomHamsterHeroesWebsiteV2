@@ -134,7 +134,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="font-skranji bg-beige items-center justify-center flex max-w-[100vw] ">
+    <div className="font-olympian bg-beige items-center justify-center flex max-w-[100vw] ">
       <Head>
         <title>Fantom Hamster Heroes </title>
         <meta
