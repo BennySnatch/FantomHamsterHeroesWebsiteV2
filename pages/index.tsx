@@ -134,12 +134,12 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="font-skranji bg-beige items-center justify-center flex max-w-[100vw] ">
+    <div className="font-naomishand bg-beige items-center justify-center flex max-w-[100vw] ">
       <Head>
-        <title>Fantom Hamster Heroes </title>
+        <title>Fantom Hamster Heroes</title>
         <meta
           name="description"
-          content="Hamster Heroes are a collection of randomly generated NFTs on the Fantom Blockchain"
+          content="Hamster Heroes are a collection of randomly generated NFTs on Fantom"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -147,40 +147,54 @@ const Home: NextPage = () => {
       <main className=" min-h-screen flex flex-col items-center justify-center max-w-screen-xl ">
         <nav className="absolute top-0 h-20 flex flex-row items-center justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
           <Link href="/">
-            <div className="items-center justify-center cursor-pointer">
-              <img
-                className="h-12 hidden lg:flex"
-                src="/assets/images/logo.png"
-                alt=""
-              />
-              <img
-                className="h-16 lg:hidden"
-                src="/assets/images/FantomHAM_LOGO.png"
-                alt=""
-              />
-            </div>
-          </Link>
-          <div className="flex items-center justify-between lg:justify-end lg:w-full ">
+            <div className="flex items-center justify-between lg:justify-end lg:w-full">
             <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
               <Link href="/hamsters">
                 <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-                  HAM
+                  Home
                 </span>
               </Link>
             </div>
-            <div
-              className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer"
-              onClick={() => connectWallet()}
-            >
-              <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-                {contextState.addr != ""
-                  ? trimAddress(contextState.addr)
-                  : "Connect"}
-              </span>
+            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  Roadmap
+                </span>
+              </Link>
             </div>
-
+            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  Collections
+                </span>
+              </Link>
+            </div>
+            </div>
+          </Link>
+          <div className="flex items-center justify-between lg:justify-end lg:w-full">
+            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  Home
+                </span>
+              </Link>
+            </div>
+            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  Roadmap
+                </span>
+              </Link>
+            </div>
+            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
+              <Link href="/hamsters">
+                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
+                  Collections
+                </span>
+              </Link>
+            </div>
+            </div>            
             <Socials />
-          </div>
         </nav>
         <Hero />
         <Ham />
