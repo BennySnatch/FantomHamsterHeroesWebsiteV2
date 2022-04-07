@@ -145,7 +145,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className=" min-h-screen flex flex-col items-center justify-center max-w-screen-xl ">
-        <nav className="absolute top-0 h-20 flex flex-row items-center justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
+        <nav className="absolute top-0 h-20 flex flex-row items-left justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
           <Link href="/">
             <div className="flex items-center justify-between lg:justify-end lg:w-full">
             <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
