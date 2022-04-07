@@ -22,7 +22,8 @@ body {
 }
 
 .skranji {
-  font-family: "Skranji";
+  font-family: "Naomis Hand";
+  src: url('../public/assets/NaomisHand-Regular.ttf');
 }
 
 .mark {
