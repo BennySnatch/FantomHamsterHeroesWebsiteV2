@@ -177,7 +177,6 @@ const Home: NextPage = () => {
                 </span>
               </Link>
             </div>
-            </div>
             <div
               className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer"
               onClick={() => connectWallet()}
