@@ -170,30 +170,7 @@ const Home: NextPage = () => {
               </Link>
             </div>
             </div>
-          </Link>
-          <div className="flex items-center justify-between lg:justify-end lg:w-full">
-            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
-              <Link href="/hamsters">
-                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-                  Home
-                </span>
-              </Link>
-            </div>
-            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
-              <Link href="/hamsters">
-                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-                  Roadmap
-                </span>
-              </Link>
-            </div>
-            <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
-              <Link href="/hamsters">
-                <span className="text-gray-800 font-bold text-xl lg:text-2xl">
-                  Collections
-                </span>
-              </Link>
-            </div>
-            </div>            
+          </Link>          
             <Socials />
         </nav>
         <Hero />
