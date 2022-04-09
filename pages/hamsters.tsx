@@ -23,6 +23,8 @@ import {
 import Socials from "../components/pages/home/Socials";
 import { finalmeta } from "../utils/traitsfinal";
 import {
+  approveAll,
+  checkApproved,
   getStaked,
   stakeHams,
   unstakeHams,
@@ -35,6 +37,7 @@ const Home: NextPage = () => {
   const { contextState, setContextState } = useContext(AppContext);
   const [myHams, setMyHams] = useState([]);
   const [myStaked, setMyStaked] = useState([]);
+  const [isApproved, setIsApproved] = useState(false);
 
   useEffect(() => {
     if (!window.ethereum) {
@@ -81,6 +84,8 @@ const Home: NextPage = () => {
 
     const ownedIds = await getOwnedIDs(hamContract, addr);
     const staked = await getStaked(stakingContract, addr);
+    const approved = await checkApproved(hamContract, addr);
+    setIsApproved(approved);
 
     setMyHams(ownedIds);
     setMyStaked(staked);
@@ -138,6 +143,7 @@ const Home: NextPage = () => {
     updateCounts();
     console.log(tx);
   }
+
   async function unstake(ids: any) {
     if (!window.ethereum) {
       window.alert("You must install MetaMask to use this website");
@@ -162,8 +168,27 @@ const Home: NextPage = () => {
     );
 
     const tx = await unstakeHams(stakingContractSigner, ids);
-    console.log(tx);
+
     updateCounts();
+  }
+  async function approve() {
+    if (!window.ethereum) {
+      window.alert("You must install MetaMask to use this website");
+      return;
+    }
+    setContextState({ ...contextState, isLoading: true });
+    let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    let network = await provider.getNetwork();
+    await provider.send("eth_requestAccounts", []);
+
+    let signer = provider.getSigner();
+    const hamContract = new ethers.Contract(HAM_ADDRESS, HAM_ABI, provider);
+    const hamContractSigner = new ethers.Contract(HAM_ADDRESS, HAM_ABI, signer);
+    const addr = await signer.getAddress();
+    const tx = await approveAll(hamContractSigner);
+
+    const approved = await checkApproved(hamContract, addr);
+    setIsApproved(approved);
   }
 
   return (
@@ -297,12 +322,21 @@ const Home: NextPage = () => {
                     </div>
                   </div>
                 </div>
-                <div
-                  onClick={() => stake([ham])}
-                  className="flex items-center justify-center text-xl px-4 py -2 bg-beige rounded hover:contrast-150 cursor-pointer select-none"
-                >
-                  Stake
-                </div>
+                {isApproved ? (
+                  <div
+                    onClick={() => stake([ham])}
+                    className="flex items-center justify-center text-xl px-4 py -2 bg-beige rounded hover:contrast-150 cursor-pointer select-none"
+                  >
+                    Stake
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => approve()}
+                    className="flex items-center justify-center text-xl px-4 py -2 bg-beige rounded hover:contrast-150 cursor-pointer select-none"
+                  >
+                    Approve
+                  </div>
+                )}
               </div>
             ))}
           </div>
