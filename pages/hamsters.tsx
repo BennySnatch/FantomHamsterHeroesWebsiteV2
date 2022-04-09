@@ -7,7 +7,12 @@ import { trimAddress, trimImageURI } from "../utils/functions/utils";
 
 import { AppContext } from "../context/AppContext";
 import Footer from "../components/pages/home/Footer";
-import { HAM_ABI, HAM_ADDRESS } from "../utils/contracts/HamContract";
+import {
+  HAM_ABI,
+  HAM_ADDRESS,
+  STAKING_ABI,
+  STAKING_ADDRESS,
+} from "../utils/contracts/HamContract";
 
 import {
   getOwnedIDs,
@@ -17,12 +22,19 @@ import {
 } from "../utils/functions/HamFunctions";
 import Socials from "../components/pages/home/Socials";
 import { finalmeta } from "../utils/traitsfinal";
+import {
+  getStaked,
+  stakeHams,
+  unstakeHams,
+} from "../utils/functions/StakingFunctions";
+import HamCard from "../components/HamCard";
 
 declare let window: any;
 
 const Home: NextPage = () => {
   const { contextState, setContextState } = useContext(AppContext);
   const [myHams, setMyHams] = useState([]);
+  const [myStaked, setMyStaked] = useState([]);
 
   useEffect(() => {
     if (!window.ethereum) {
@@ -57,13 +69,21 @@ const Home: NextPage = () => {
 
     let signer = provider.getSigner();
     const hamContract = new ethers.Contract(HAM_ADDRESS, HAM_ABI, provider);
+    const stakingContract = new ethers.Contract(
+      STAKING_ADDRESS,
+      STAKING_ABI,
+      provider
+    );
+
     const hamContractSigner = new ethers.Contract(HAM_ADDRESS, HAM_ABI, signer);
 
     const addr = await signer.getAddress();
 
     const ownedIds = await getOwnedIDs(hamContract, addr);
-    const [rank, score] = getRarity(12);
+    const staked = await getStaked(stakingContract, addr);
+
     setMyHams(ownedIds);
+    setMyStaked(staked);
 
     setContextState({
       ...contextState,
@@ -73,6 +93,77 @@ const Home: NextPage = () => {
       hamContract,
       hamContractSigner,
     });
+  }
+
+  async function updateCounts() {
+    let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    let signer = provider.getSigner();
+    const hamContract = new ethers.Contract(HAM_ADDRESS, HAM_ABI, provider);
+    const stakingContract = new ethers.Contract(
+      STAKING_ADDRESS,
+      STAKING_ABI,
+      provider
+    );
+    const addr = await signer.getAddress();
+    const ownedIds = await getOwnedIDs(hamContract, addr);
+    const staked = await getStaked(stakingContract, addr);
+    setMyHams(ownedIds);
+    setMyStaked(staked);
+  }
+
+  async function stake(ids: any) {
+    if (!window.ethereum) {
+      window.alert("You must install MetaMask to use this website");
+      return;
+    }
+    setContextState({ ...contextState, isLoading: true });
+    let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    let network = await provider.getNetwork();
+    await provider.send("eth_requestAccounts", []);
+
+    if (network.chainId != 250) {
+      window.alert("Switch to Fantom to continue");
+      setContextState({ ...contextState, isFantom: false, isConnected: true });
+      return;
+    }
+
+    let signer = provider.getSigner();
+    const stakingContractSigner = new ethers.Contract(
+      STAKING_ADDRESS,
+      STAKING_ABI,
+      signer
+    );
+
+    const tx = await stakeHams(stakingContractSigner, ids);
+    updateCounts();
+    console.log(tx);
+  }
+  async function unstake(ids: any) {
+    if (!window.ethereum) {
+      window.alert("You must install MetaMask to use this website");
+      return;
+    }
+    setContextState({ ...contextState, isLoading: true });
+    let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    let network = await provider.getNetwork();
+    await provider.send("eth_requestAccounts", []);
+
+    if (network.chainId != 250) {
+      window.alert("Switch to Fantom to continue");
+      setContextState({ ...contextState, isFantom: false, isConnected: true });
+      return;
+    }
+
+    let signer = provider.getSigner();
+    const stakingContractSigner = new ethers.Contract(
+      STAKING_ADDRESS,
+      STAKING_ABI,
+      signer
+    );
+
+    const tx = await unstakeHams(stakingContractSigner, ids);
+    console.log(tx);
+    updateCounts();
   }
 
   return (
@@ -125,7 +216,47 @@ const Home: NextPage = () => {
           <div className="text-4xl font-bold text-blackish text-center mb-8">
             My Hamster Heroes
           </div>
+          {myHams.length == 0 && myStaked.length == 0 && (
+            <div className="text-4xl flex items-center justify-center py-60 w-full">
+              Oops! You don't own any Hamsters.
+            </div>
+          )}
+          <div className="flex items-center justify-center mb-8">
+            {myHams.length > 0 && (
+              <div
+                onClick={() => stake(myHams)}
+                className="flex items-center justify-center text-xl px-4 py -2 bg-black text-beige w-40 py-2 rounded hover:contrast-150 cursor-pointer select-none"
+              >
+                Stake All
+              </div>
+            )}
+            {myStaked.length > 0 && (
+              <div
+                onClick={() => unstake(myStaked)}
+                className="flex items-center justify-center text-xl px-4 py -2 bg-black text-beige w-40 ml-8 py-2 rounded hover:contrast-150 cursor-pointer select-none"
+              >
+                UnStake All
+              </div>
+            )}
+          </div>
 
+          {myStaked.length > 0 && (
+            <div className="flex flex-col  justify-center py-8">
+              <div className="text-2xl font-bold text-blackish  mb-8">
+                Staked Hamsters
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-5 place-items-center gap-8">
+                {myStaked.map((ham: number, index) => (
+                  <HamCard key={index} ham={ham} update={updateCounts} />
+                ))}
+              </div>
+            </div>
+          )}
+          {myHams.length > 0 && (
+            <div className="text-2xl font-bold text-blackish  mb-8">
+              UnStaked Hamsters
+            </div>
+          )}
           <div className="grid grid-cols-1 lg:grid-cols-5 place-items-center gap-8">
             {myHams.map((ham, index) => (
               <div
@@ -165,6 +296,12 @@ const Home: NextPage = () => {
                       <span className="ml-4 text-2xl">{getScore(ham)}</span>
                     </div>
                   </div>
+                </div>
+                <div
+                  onClick={() => stake([ham])}
+                  className="flex items-center justify-center text-xl px-4 py -2 bg-beige rounded hover:contrast-150 cursor-pointer select-none"
+                >
+                  Stake
                 </div>
               </div>
             ))}
