@@ -77,7 +77,6 @@ const Home: NextPage = () => {
             <Socials />
         </nav>
         <Ham />
-        <Mint balance={contextState.balance} />
         <Marquee />
         <Gallery />
         <Roadmap />
