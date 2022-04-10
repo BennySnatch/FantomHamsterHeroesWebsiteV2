@@ -15,6 +15,7 @@ import {
 } from "../utils/functions/utils";
 
 import { AppContext } from "../context/AppContext";
+import Popup from "../components/Popup";
 import Hero from "../components/pages/home/Hero";
 import Mint from "../components/pages/home/Mint";
 import Gallery from "../components/pages/home/Gallery";
@@ -32,6 +33,11 @@ import Roadmap from "../components/pages/home/Roadmap";
 import Socials from "../components/pages/home/Socials";
 import Marquee from "../components/pages/home/Marquee";
 import Ham from "../components/pages/home/Ham";
+
+declare let window: any;
+
+const Home: NextPage = () => {
+  const { contextState, setContextState } = useContext(AppContext);
 
   return (
     <div className="font-naomishand bg-beige items-center justify-center flex max-w-[100vw] ">
@@ -171,6 +177,6 @@ import Ham from "../components/pages/home/Ham";
       </main>
     </div>
   );
-}
+};
 
 export default Home;
