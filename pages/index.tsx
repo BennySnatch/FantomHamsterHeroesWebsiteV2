@@ -79,8 +79,6 @@ const Home: NextPage = () => {
         <Ham />
         <Marquee />
         <Gallery />
-        <Roadmap />
-        <Footer />
       </main>
     </div>
   );
