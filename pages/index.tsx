@@ -166,12 +166,6 @@ const Home: NextPage = () => {
                   </div>
                 )}
             </div>
-            <div
-              className=" border-2 rounded  bg-beige text-blackish leading-3 text-center px-4 py-2 font-bold cursor-pointer"
-              onClick={() => togglePop()}
-            >
-              Close
-            </div>
           </div>
         </Popup>
       </main>
