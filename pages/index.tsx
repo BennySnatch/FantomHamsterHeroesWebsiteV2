@@ -171,6 +171,6 @@ import Ham from "../components/pages/home/Ham";
       </main>
     </div>
   );
-};
+}
 
 export default Home;
