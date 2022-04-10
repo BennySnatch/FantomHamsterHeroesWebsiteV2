@@ -15,9 +15,6 @@ import {
 } from "../utils/functions/utils";
 
 import { AppContext } from "../context/AppContext";
-import Popup from "../components/Popup";
-import Hero from "../components/pages/home/Hero";
-import Mint from "../components/pages/home/Mint";
 import Gallery from "../components/pages/home/Gallery";
 import Footer from "../components/pages/home/Footer";
 import { HAM_ABI, HAM_ADDRESS } from "../utils/contracts/HamContract";
