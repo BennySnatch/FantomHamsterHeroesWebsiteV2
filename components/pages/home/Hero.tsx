@@ -19,10 +19,7 @@ function Hero() {
         </h1>
         <span className="text-lg font-semibold text-gray-700 leading-relaxed lg:text-left">
           Fantom Hamster Heroes is a collection of 3333 uniquely and randomly
-          generated NFTs stored on the Fantom Blockchain. They watch apes, dogs,
-          cats, and birds get released out of their cages and felt their
-          cuteness wasn’t appreciated on the blockchain. To find owners to adopt
-          them, they’ve decided… TO GO HAM ON EVERYTHING!
+          generated NFTs stored on the Fantom Blockchain.
         </span>
       </div>
     </div>

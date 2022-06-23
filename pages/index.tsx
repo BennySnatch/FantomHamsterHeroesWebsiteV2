@@ -136,7 +136,7 @@ const Home: NextPage = () => {
   return (
     <div className="font-skranji bg-beige items-center justify-center flex max-w-[100vw] ">
       <Head>
-        <title>Fantom Hamster Heroes </title>
+        <title>Fantom Hamster Heroes</title>
         <meta
           name="description"
           content="Hamster Heroes are a collection of randomly generated NFTs on the Fantom Blockchain"
@@ -144,10 +144,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className=" min-h-screen flex flex-col items-center justify-center max-w-screen-xl ">
-        <nav className="absolute top-0 h-20 flex flex-row items-center justify-between lg:justify-center  w-full px-4 lg:px-20 py-12 ">
+      <main className=" min-h-screen flex flex-col items-keft justify-left max-w-screen-xl ">
+        <nav className="absolute top-0 h-20 flex flex-row items-left justify-between lg:justify-left  w-full px-4 lg:px-20 py-12 ">
           <Link href="/">
-            <div className="items-center justify-center cursor-pointer">
+            <div className="items-left justify-left cursor-pointer">
               <img
                 className="h-12 hidden lg:flex"
                 src="/assets/images/logo.png"
@@ -160,7 +160,7 @@ const Home: NextPage = () => {
               />
             </div>
           </Link>
-          <div className="flex items-center justify-between lg:justify-end lg:w-full ">
+          <div className="flex items-left justify-between lg:justify-end lg:w-full ">
             <div className="px-6 py-3 border-2 uppercase border-blackish rounded-md cursor-pointer mr-4">
               <Link href="/hamsters">
                 <span className="text-gray-800 font-bold text-xl lg:text-2xl">
